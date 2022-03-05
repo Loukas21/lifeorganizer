@@ -1,0 +1,53 @@
+<?php
+$this->headTitle('Edit Quote');
+
+$this->mainMenu()->setActiveItemId('quotes');
+
+$this->pageBreadcrumbs()->setItems([
+            'Strona główna'=>$this->url('home'),
+            'Cytaty'=>$this->url('quotes'),
+            'Edycja'=>$this->url('quotes', ['action'=>'edit', 'id'=>$quote->getId()])
+            ]);
+
+$form->get('quote')->setAttributes([
+    'class'=>'form-control',
+    'placeholder'=>'Name Surname'
+    ]);
+
+$form->get('quote')->setAttributes([
+    'class'=>'form-control',
+    'placeholder'=>'Quote Text'
+    ]);
+
+$form->get('submit')
+        ->setAttributes(['class'=>'btn btn-primary'])
+        ->setValue('Save');
+
+$form->prepare();
+?>
+
+<h1>Edit Quote</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <?= $this->form()->openTag($form); ?>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('author')); ?>
+            <?= $this->formElement($form->get('author')); ?>
+            <?= $this->formElementErrors($form->get('author')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('quote')); ?>
+            <?= $this->formElement($form->get('quote')); ?>
+            <?= $this->formElementErrors($form->get('quote')); ?>
+        </div>
+
+        <?= $this->formElement($form->get('csrf')); ?>
+        <?= $this->formElementErrors($form->get('csrf')); ?>
+        <?= $this->formElement($form->get('submit')); ?>
+
+        <?= $this->form()->closeTag(); ?>
+    </div>
+</div>

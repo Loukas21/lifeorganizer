@@ -1,0 +1,55 @@
+<?php
+$this->headTitle('Add Quote');
+
+$this->mainMenu()->setActiveItemId('quotes');
+
+$this->pageBreadcrumbs()->setItems([
+            'Strona główna'=>$this->url('home'),
+            'Cytaty'=>$this->url('quotes'),
+            'Dodawanie'=>$this->url('quotes', ['action'=>'add'])
+            ]);
+
+$form->get('author')->setAttributes([
+    'class'=>'form-control',
+    'placeholder'=>'--Name Surname--'
+    ]);
+
+$form->get('quote')->setAttributes([
+    'class'=>'form-control',
+    'placeholder'=>'Quote text'
+    ]);
+
+$form->get('submit')->setAttributes(['class'=>'btn btn-primary']);
+
+$form->prepare();
+?>
+
+<h1>Add Quote</h1>
+
+<p>
+    Please fill out the following form and click the <i>Create</i> button.
+</p>
+
+<div class="row">
+    <div class="col-md-6">
+        <?= $this->form()->openTag($form); ?>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('author')); ?>
+            <?= $this->formElement($form->get('author')); ?>
+            <?= $this->formElementErrors($form->get('author')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('quote')); ?>
+            <?= $this->formElement($form->get('quote')); ?>
+            <?= $this->formElementErrors($form->get('quote')); ?>
+        </div>
+
+        <?= $this->formElement($form->get('csrf')); ?>
+        <?= $this->formElementErrors($form->get('csrf')); ?>
+        <?= $this->formElement($form->get('submit')); ?>
+
+        <?= $this->form()->closeTag(); ?>
+    </div>
+</div>

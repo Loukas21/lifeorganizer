@@ -1,0 +1,103 @@
+<?= $this->doctype() ?>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?= $this->headTitle('Life Organizer')->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?= $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <!-- Le styles -->
+        <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'])
+                        //->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
+                        ->prependStylesheet($this->basePath('css/style.css'))
+                        ->prependStylesheet('https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css')
+                        ->prependStylesheet($this->basePath('fontawesome-free-5-15-4-web/css/all.css'))
+
+
+        ?>
+        <!-- Scripts -->
+        <?= $this->headScript()
+            ->prependFile('https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js')
+            ->prependFile($this->basePath('js/jquery-2.2.4.min.js'))
+            ->prependFile('https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js')
+        ?>
+
+    </head>
+    <body>
+        <main class="flex-shrink-0 overflow-auto" role="main">
+            <header class='row col-md-12 app-header-row px-3'>
+                <!-- Page header -->
+                <div class='col-md-4 col-xs-12 app-name text-center'>
+                  Life Organizer
+                </div>
+                <div class='col-md-4 col-xs-12 app-datetime text-center'>
+                  <span id='clock'></span>
+                </div>
+                <div class='col-md-4 col-xs-12 my-auto text-center'>
+                  <span class='app-user-button data-mdb-attribute'>
+                    <i class="fas fa-user-circle d-none" type="button" data-toggle="tooltip" data-placement="left" title="Menu użytkownika"></i>
+                      <button class="btn btn-outline-light btn-sm"><span style="font-size:smaller;"><?= $this->userMenu()->render(); ?></span></button>
+                  </span>
+                </div>
+            </header>
+            <div class='row col-md-12 app-info-bar'>
+              <div class='row col-md-12 px-3'>
+                <div class='col-3 px-3 text-center' type="button" data-toggle="tooltip" data-placement="left" title="Pokaż Kalendarz">
+                  <div class='col-md-3 btn btn-toggle app-calendar-btn' data-bs-toggle="collapse" data-bs-target="#notifications-collapse">
+                    <div class="row col-md-4"><i class="fas fa-calendar-alt"></i></div>
+                    <div class="row col-md-4"><i class="fas fa-chevron-down"></i></div>
+                  </div>
+                  <div class="row col-md-12 px-3 text-center justify-content-center">
+                  </div>
+                </div>
+                <div class='col-3 px-3 text-center' type="button" data-toggle="tooltip" data-placement="left" title="Powiadomienia">
+                  <i class="fas fa-info-circle"></i> 3
+                </div>
+                <div class='col-3 px-3 text-center' type="button" data-toggle="tooltip" data-placement="left" title="Zadania">
+                  <i class="fas fa-tasks"></i> 1/4
+                </div>
+                <div class='col-3 px-3 text-center' type="button" data-toggle="tooltip" data-placement="left" title="Nawyki">
+                  <i class="fas fa-calendar-check"></i> 5/7
+                </div>
+              </div>
+              <div id="notifications-collapse" class="collapse text-center" style="">
+                <div class='p-3'>Tu miejsce na kalendarz</div>
+              </div>
+            </div>
+            <div class='row col-12 px-md-3 app-breadcrumbs-bar align-self-center'>
+              <div class='align-self-center'><?= $this->pageBreadcrumbs()->render(); ?></div>
+            </div>
+
+            <div class="row col-md-12 app-main-area">
+              <!-- Navigation bar -->
+              <?php
+              // Check if the activeMenuItemId passed to layout view model
+              // and if so, use it for setting active navbar item.
+              if (isset($activeMenuItemId)) {
+                  $this->mainMenu()->setActiveItemId($activeMenuItemId);
+              }
+
+              // Render the navbar
+              echo $this->mainMenu()->render();
+              ?>
+              <div class="col-lg-10 col-md-9">
+                  <!-- Page content placeholder -->
+                  <?= $this->content; ?>
+              </div>
+            </div>
+            <hr>
+            <footer class="footer mt-auto py-3 bg-light app-footer">
+              <div class="container">
+                <span class="text-muted">&copy 2021 - <?= date('Y') ?> Life Organizer ver. 0.0.1. Autor: Łukasz Skibiński. Wszelkie prawa zastrzeżone.</span>
+              </div>
+            </footer>
+        </main>
+        <?= $this->inlineScript()
+              ->prependFile($this->basePath('js/clock.js'))
+        ?>
+    </body>
+</html>

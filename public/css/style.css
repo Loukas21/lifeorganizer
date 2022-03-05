@@ -1,0 +1,121 @@
+body
+{
+  font-family: Papyrus, serif;
+}
+
+.app-header-row
+{
+  background-image: linear-gradient(#58554D,#3F3E39);
+  padding-bottom: 10px;
+  padding-top: 5px;
+}
+
+.app-name
+{
+  font-size: 26px;
+  font-weight: 600;
+  text-shadow: 1px 0.5px black;
+  color: silver;
+}
+
+.app-datetime
+{
+  color: lightgrey;
+  font-size: 13px;
+  font-weight: bold;
+  text-shadow: 1px 0.5px black;
+}
+
+.app-user-button
+{
+  font-size: 30px;
+  color: silver;
+  padding-bottom: 5px !important;
+}
+
+.app-info-bar
+{
+  min-height: 40px;
+  color: white;
+  background-image: linear-gradient(#54514A, #65625B);
+}
+
+.app-breadcrumbs-bar
+{
+  background-image: linear-gradient(#54514A, #434343);
+  min-height: 40px;
+  color: lightgrey;
+  font-size: 14px;
+}
+
+.app-calendar-btn
+{
+  color: lightgrey;
+}
+
+.app-sidebar
+{
+  background: #54514A;
+}
+
+.app-list-group-item
+{
+  background: #606056;
+  color: lightgrey;
+}
+
+.app-sidebar-border
+{
+  border-bottom: 1px solid;
+  border-color: #54514A !important;
+}
+
+.app-sidebar-btn
+{
+  width: 100%;
+  color: white;
+  text-align: left;
+  box-shadow: none !important;
+}
+
+.app-content
+{
+  font-size: 14px;
+}
+
+.app-footer
+{
+  font-size: 14px;
+}
+
+.breadcrumb {
+  list-style: none;
+}
+.breadcrumb > li {
+  display: inline-block;
+}
+.breadcrumb > li + li:before {
+  padding: 0 5px;
+  color: #ccc;
+  content: "/\00a0";
+}
+.breadcrumb > .active {
+  color: #777;
+}
+
+.link-light:hover {
+  color: #212529;
+}
+
+#quote {
+  resize: none;
+  margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+  .app-breadcrumbs-bar {
+    margin:0;
+    font-size: 10px;
+  }
+
+}

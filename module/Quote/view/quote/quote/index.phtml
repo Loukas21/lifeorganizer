@@ -1,0 +1,64 @@
+<?php
+$this->headTitle('Quotes');
+
+$this->mainMenu()->setActiveItemId('quotes');
+
+$this->pageBreadcrumbs()->setItems([
+            'Strona główna'=>$this->url('home'),
+            'Cytaty'=>$this->url('quotes'),
+            ]);
+?>
+
+<h1>Manage Quotes</h1>
+
+<?= $this->flashMessenger()->render('error', ['alert', 'alert-warning']); ?>
+<?= $this->flashMessenger()->render('success', ['alert', 'alert-success']); ?>
+<?= $this->flashMessenger()->render('info', ['alert', 'alert-info']); ?>
+
+<p>
+<a class="btn btn-default" href="
+    <?= $this->url('quotes', ['action'=>'add']); ?>">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Quote
+</a>
+</p>
+
+<table class="table table-striped">
+
+   <tr>
+        <th>ID</th>
+        <th>Author</th>
+        <th>Quote</th>
+    </tr>
+
+    <?php foreach ($quotes as $quote): ?>
+
+    <tr>
+        <td><?= $this->escapeHtml($quote->getId()); ?></td>
+        <td>
+            <a href="<?= $this->url('quotes', ['action'=>'view', 'id'=>$quote->getId()]); ?>">
+                <?= $this->escapeHtml($quote->getAuthor()); ?>
+            </a>
+        </td>
+        <td>
+            <?= $this->escapeHtml($quote->getQuote()); ?></a>
+        </td>
+        <td>
+            <a class="btn btn-info" href="<?= $this->url('quotes',
+                    ['action'=>'edit', 'id'=>$quote->getId()]); ?>">
+                <span class="glyphicon glyphicon-pencil" ></span> Edit
+            </a>
+            <a class="btn btn-danger" href="<?= $this->url('quotes',
+                    ['action'=>'delete', 'id'=>$quote->getId()]); ?>">
+                <span class="glyphicon glyphicon-remove"></span> Delete
+            </a>
+        </td>
+    </tr>
+
+    <?php endforeach; ?>
+
+</table>
+
+<?= $this->paginationControl($quotes,
+                    'Sliding',
+                    'quote/partial/paginator',
+                    array('route' => 'quotes')); ?>

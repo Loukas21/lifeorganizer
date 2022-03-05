@@ -1,0 +1,146 @@
+<?php
+namespace Quote\Form;
+
+use Zend\Form\Form;
+use Zend\Form\Fieldset;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\ArrayInput;
+
+/**
+ * This form is used to collect quote's author, quote text. The form
+ * can work in two scenarios - 'create' and 'update'.
+ */
+class QuoteForm extends Form
+{
+    /**
+     * Scenario ('create' or 'update').
+     * @var string
+     */
+    private $scenario;
+
+    /**
+     * Entity manager.
+     * @var Doctrine\ORM\EntityManager
+     */
+    private $entityManager = null;
+
+    /**
+     * Current quote.
+     * @var Quote\Entity\Quote
+     */
+    private $quote = null;
+
+    /**
+     * Constructor.
+     */
+    public function __construct($scenario = 'create', $entityManager = null, $quote = null)
+    {
+        // Define form name
+        parent::__construct('quote-form');
+
+        // Set POST method for this form
+        $this->setAttribute('method', 'post');
+
+        // Save parameters for internal use.
+        $this->scenario = $scenario;
+        $this->entityManager = $entityManager;
+        $this->quote = $quote;
+
+        $this->addElements();
+        $this->addInputFilter();
+    }
+
+    /**
+     * This method adds elements to form (input fields and submit button).
+     */
+    protected function addElements()
+    {
+        // Add "author" field
+        $this->add([
+            'type'  => 'text',
+            'name' => 'author',
+            'options' => [
+                'label' => 'Author',
+            ],
+        ]);
+
+        // Add "quote" field
+        $this->add([
+            'type'  => 'textarea',
+            'name' => 'quote',
+            'options' => [
+                'label' => 'Quote',
+            ],
+            'attributes' => [
+                'id' => 'quote',
+                'rows' => '6',
+            ],
+        ]);
+
+
+        // Add the CSRF field
+        $this->add([
+            'type' => 'csrf',
+            'name' => 'csrf',
+            'options' => [
+                'csrf_options' => [
+                    'timeout' => 600
+                ]
+            ],
+        ]);
+
+        // Add the Submit button
+        $this->add([
+            'type'  => 'submit',
+            'name' => 'submit',
+            'attributes' => [
+                'value' => 'Create'
+            ],
+        ]);
+    }
+
+    /**
+     * This method creates input filter (used for form filtering/validation).
+     */
+    private function addInputFilter()
+    {
+        // Create main input filter
+        $inputFilter = $this->getInputFilter();
+
+        // Add input for "author" field
+        $inputFilter->add([
+                'name'     => 'author',
+                'required' => false,
+                'filters'  => [
+                    ['name' => 'StringTrim'],
+                ],
+                'validators' => [
+                    [
+                        'name'    => 'StringLength',
+                        'options' => [
+                            'min' => 0,
+                            'max' => 150
+                        ],
+                    ],
+                ],
+            ]);
+
+        // Add input for "quote" field
+        $inputFilter->add([
+                'name'     => 'author',
+                'required' => true,
+                'filters'  => [
+                    ['name' => 'StringTrim'],
+                ],
+                'validators' => [
+                    [
+                        'name'    => 'StringLength',
+                        'options' => [
+                            'min' => 1,
+                            'max' => 1000
+                        ],
+                    ],
+                ],
+            ]);
+    }
+}

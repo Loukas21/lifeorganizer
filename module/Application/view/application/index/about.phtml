@@ -1,0 +1,36 @@
+<?php
+$this->headTitle('About');
+
+$this->mainMenu()->setActiveItemId('about');
+
+$this->pageBreadcrumbs()->setItems([
+            'Strona główna'=>$this->url('home'),
+            'O aplikacji'=>$this->url('about'),
+            ]);
+?>
+<!--
+<h1>About</h1>
+
+<p>
+    Application name: <?= $this->escapeHtml($appName) ?>
+</p>
+
+<p>
+    Application description: <?= $this->escapeHtml($appDescription) ?>
+</p>
+-->
+<div class="app-content p-2">
+<h1>Witaj na stronie</h1>
+<p>Life Organizer to mój autorski projekt, który realizuję, aby lepiej organizować swoje życie.
+  Aplikacja została napisana w głównej mierze w języku PHP z wykorzystaniem Zend Framework 3.
+  Działanie witryny wspomagają także technologie Apache, HTML, CSS, MySQL, Bootstrap, VUE.js, charts.js, CRON, Jenkins.
+</p>
+<p>Poniżej udostępniam dane logowania, które pozwolą Ci sprawdzić działanie strony w praktyce:</br></br>
+  Login: loTestUser</br>
+  Hasło: 5ecur1ty</br></br>
+  Aby wpisać dane logowania wybierz przycisk Zaloguj się widoczny powyżej.
+</p>
+<p>
+  Pozdrawiam,</br>
+  Łukasz Skibiński
+</p>

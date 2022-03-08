@@ -139,7 +139,7 @@ class Menu extends AbstractHelper
                 $label = isset($item['label']) ? $item['label'] : '';
 
                 $result .= '<li class="border-bottom app-sidebar-border">';
-                $result .= '<a class="'."link-light text-decoration-none px-3".'"'. 'href="'.$escapeHtml($link).'">'.$escapeHtml($label).'</a>';
+                $result .= '<a class="'."link-light text-decoration-none px-2".'"'. 'href="'.$escapeHtml($link).'">'.$escapeHtml($label).'</a>';
                 $result .= '</li>';
             }
             $result .= '</ul>';

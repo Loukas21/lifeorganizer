@@ -38,6 +38,7 @@ class QuoteManager
     $quote = new Quote();
     $quote->setAuthor($data['author']);
     $quote->setQuote($data['quote']);
+    $quote->setUser($data['user']);
 
     // Add the entity to the entity manager.
     $this->entityManager->persist($quote);
@@ -53,6 +54,7 @@ class QuoteManager
 
     $quote->setAuthor($data['author']);
     $quote->setQuote($data['quote']);
+    //$quote->setUser($data['user']);
 
     // Apply changes to database.
     $this->entityManager->flush();

@@ -33,6 +33,10 @@ $form->prepare();
         <?= $this->form()->openTag($form); ?>
 
         <div class="form-group">
+            <?= $this->formElement($form->get('user')); ?>
+        </div>
+
+        <div class="form-group">
             <?= $this->formLabel($form->get('author')); ?>
             <?= $this->formElement($form->get('author')); ?>
             <?= $this->formElementErrors($form->get('author')); ?>

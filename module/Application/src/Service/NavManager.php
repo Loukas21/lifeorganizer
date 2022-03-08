@@ -143,7 +143,7 @@ class NavManager
                         ];
             }
 
-            if (count($activitiesDropdownItems)!=-1) {
+            if (count($activitiesDropdownItems)!=0) {
               $items[] = [
                   'id' => 'activities',
                   'label' => 'Działalność',
@@ -185,6 +185,7 @@ class NavManager
               ];
             }
 
+            $financeDropdownItems = [];
 
             if ($this->rbacManager->isGranted(null, 'homebudget.manage')) {
                 $financeDropdownItems[] = [
@@ -242,6 +243,8 @@ class NavManager
               ];
             }
 
+            $experienceDropdownItems = [];
+
             if ($this->rbacManager->isGranted(null, 'education.manage')) {
                 $experienceDropdownItems[] = [
                             'id' => 'education',
@@ -297,6 +300,8 @@ class NavManager
                   'dropdown' => $experienceDropdownItems
               ];
             }
+
+            $referencesDropdownItems = [];
 
             if ($this->rbacManager->isGranted(null, 'quotes.manage')) {
                 $referencesDropdownItems[] = [

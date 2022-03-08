@@ -77,6 +77,11 @@ class QuoteForm extends Form
             ],
         ]);
 
+        $this->add([
+          'type' => 'hidden',
+          'name' => 'user',
+        ]);
+
 
         // Add the CSRF field
         $this->add([

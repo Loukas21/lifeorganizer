@@ -28,6 +28,11 @@ class Quote
      */
     protected $quote;
 
+
+    /**
+     * @ORM\Column(name="user_id")
+     */
+    protected $user;
     /**
      * Constructor.
      */
@@ -88,5 +93,23 @@ class Quote
     public function setQuote($quote)
     {
         $this->quote = $quote;
+    }
+
+    /**
+     * Returns user.
+     * @return string
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Sets user.
+     * @param string $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
     }
 }

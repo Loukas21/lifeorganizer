@@ -13,16 +13,21 @@ class QuoteRepository extends EntityRepository
      * Retrieves all quotes in descending id order.
      * @return Query
      */
-    public function findAllQuotes()
+    public function findQuotesByUser($userid)
     {
+
         $entityManager = $this->getEntityManager();
 
         $queryBuilder = $entityManager->createQueryBuilder();
 
         $queryBuilder->select('u')
             ->from(Quote::class, 'u')
+            ->where('u.user = :userid')
+            ->setParameter('userid', $userid)
             ->orderBy('u.id', 'DESC');
+
 
         return $queryBuilder->getQuery();
     }
+
 }

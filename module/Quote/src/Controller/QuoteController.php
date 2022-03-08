@@ -7,6 +7,7 @@ use Zend\View\Model\ViewModel;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
 use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
 use Zend\Paginator\Paginator;
+use User\Entity\User;
 use Application\Entity\Post;
 use Quote\Entity\Quote;
 use Quote\Form\QuoteForm;
@@ -33,6 +34,22 @@ class QuoteController extends AbstractActionController
 
   public function indexAction()
   {
+    /*OWN CODE*/
+
+    //check if user is logged in
+    if ($this->identity()!=null)
+    {
+      //get identity user (email)
+      $userEmail = $this->identity();
+      //find user by email
+      $user = $this->entityManager->getRepository(User::class)
+              ->findOneByEmail($userEmail);
+      //get user id
+      $userid = $user->getId();
+    } else {
+      $userid = 0;
+    }
+    /*END OF OWN CODe*/
 
     if (!$this->access('quotes.manage')){
       $this->getResponse()->setStatusCode(401);
@@ -40,10 +57,11 @@ class QuoteController extends AbstractActionController
     }
     $page = $this->params()->fromQuery('page', 1);
     $query = $this->entityManager->getRepository(Quote::class)
-              ->findAllQuotes();
+              ->findQuotesByUser($userid); //OWN CODE ELEMENT
+
     $adapter = new DoctrineAdapter(new ORMPaginator($query, false));
     $paginator = new Paginator($adapter);
-    $paginator->setDefaultItemCountPerPage(3);
+    $paginator->setDefaultItemCountPerPage(10);
     $paginator->setCurrentPageNumber($page);
 
     return new ViewModel([
@@ -53,10 +71,26 @@ class QuoteController extends AbstractActionController
 
   public function addAction()
   {
+    /*OWN CODE*/
+    $userid = 0;
+    //check if user is logged in
+    if ($this->identity()!=null)
+    {
+      //get identity user (email)
+      $userEmail = $this->identity();
+      //find user by email
+      $user = $this->entityManager->getRepository(User::class)
+              ->findOneByEmail($userEmail);
+      //get user id
+      $userid = $user->getId();
+    }
+    /*END OF OWN CODE*/
+
     $form = new QuoteForm('create', $this->entityManager);
 
     if ($this->getRequest()->isPost()) {
       $data = $this->params()->fromPost();
+      $data['user'] = $userid; //OWN CODE ELEMENT
 
       $form->setData($data);
 
@@ -115,6 +149,7 @@ class QuoteController extends AbstractActionController
       $form->setData(array(
         'author' => $quote->getAuthor(),
         'quote'=>$quote->getQuote(),
+        'user'=>$quote->getUser()
       ));
 
       return new ViewModel(array(

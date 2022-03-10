@@ -35,21 +35,17 @@ class QuoteController extends AbstractActionController
   public function indexAction()
   {
     /*OWN CODE*/
-
+    $userid = 0;
     //check if user is logged in
     if ($this->identity()!=null)
     {
-      //get identity user (email)
-      $userEmail = $this->identity();
       //find user by email
       $user = $this->entityManager->getRepository(User::class)
-              ->findOneByEmail($userEmail);
-      //get user id
+              ->findOneByEmail($this->identity());
+      //get user ID
       $userid = $user->getId();
-    } else {
-      $userid = 0;
     }
-    /*END OF OWN CODe*/
+    /*END OF OWN CODE*/
 
     if (!$this->access('quotes.manage')){
       $this->getResponse()->setStatusCode(401);
@@ -76,11 +72,9 @@ class QuoteController extends AbstractActionController
     //check if user is logged in
     if ($this->identity()!=null)
     {
-      //get identity user (email)
-      $userEmail = $this->identity();
       //find user by email
       $user = $this->entityManager->getRepository(User::class)
-              ->findOneByEmail($userEmail);
+              ->findOneByEmail($this->identity());
       //get user id
       $userid = $user->getId();
     }

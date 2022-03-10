@@ -30,4 +30,19 @@ class QuoteRepository extends EntityRepository
         return $queryBuilder->getQuery();
     }
 
+    public function findRandomQuoteByUser($userid)
+    {
+        $entityManager = $this->getEntityManager();
+
+        $queryBuilder = $entityManager->createQueryBuilder();
+
+        $queryBuilder->select('u')
+            ->from(Quote::class, 'u')
+            ->where('u.user = :userid')
+            ->setParameter('userid', $userid)
+            ->setMaxResults(1);
+
+        return $queryBuilder->getQuery();
+    }
+
 }

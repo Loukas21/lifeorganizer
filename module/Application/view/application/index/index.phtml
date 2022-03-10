@@ -11,8 +11,12 @@ $this->pageBreadcrumbs()->setItems([
 <h1>Witaj na stronie</h1>
 
 <figure>
-<p>Im więcej potu na poligonie, tym mniej krwi na polu walki.</p>
+<p>
+  <?= $this->escapeHtml($quote) ?>
+</p>
 <figcaption>
-  <cite>Witold Anusz</cite>
+  <cite>
+    <?= $this->escapeHtml($author) ?>
+  </cite>
 </figcaption>
 </figure>

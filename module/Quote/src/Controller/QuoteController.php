@@ -179,5 +179,4 @@ class QuoteController extends AbstractActionController
       return $this->redirect()->toRoute('quotes', ['action'=>'index']);
   }
 
-
 }

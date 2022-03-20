@@ -32,8 +32,10 @@ return [
     // We register module-provided controller plugins under this key.
     'controller_plugins' => [
         'factories' => [
+            Controller\Plugin\RandomQuotePlugin::class => Controller\Plugin\Factory\RandomQuotePluginFactory::class,
         ],
         'aliases' => [
+            'randomQuote' => Controller\Plugin\RandomQuotePlugin::class,
         ],
     ],
     // The 'access_filter' key is used by the User module to restrict or permit
@@ -68,12 +70,10 @@ return [
     // We register module-provided view helpers under this key.
     'view_helpers' => [
         'factories' => [
-            //View\Helper\Access::class => View\Helper\Factory\AccessFactory::class,
-            //View\Helper\CurrentUser::class => View\Helper\Factory\CurrentUserFactory::class,
+            View\Helper\RandomQuote::class => View\Helper\Factory\RandomQuote::class,
         ],
         'aliases' => [
-            //'access' => View\Helper\Access::class,
-            //'currentUser' => View\Helper\CurrentUser::class,
+            'randomQuote' => View\Helper\RandomQuote::class,
         ],
     ],
     'doctrine' => [

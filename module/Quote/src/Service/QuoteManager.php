@@ -68,4 +68,22 @@ class QuoteManager
       $this->entityManager->flush();
 
   }
+  //OWN CODE
+  public function getRandomQuoteByUserId($userid)
+  {
+    $quoteQuery = $this->entityManager->getRepository(Quote::class)
+        ->findQuotesByUser($userid);
+    if ($quoteQuery == null) {
+      throw new \Exception('Quote not found');
+      return null;
+    }
+
+    $quote = $quoteQuery->getResult(\Doctrine\ORM\Query::HYDRATE_SCALAR);
+    $count = count($quote);
+    $selectedQuote = $quote[rand(0,$count-1)];
+
+    return $selectedQuote;
+  }
+  //END OF OWN CODE
+
 }

@@ -4,7 +4,7 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use User\Entity\User;
-//use Quote\Entity\Quote;
+use Quote\Entity\Quote;
 
 /**
  * This is the main controller class of the User Demo application. It contains
@@ -32,29 +32,23 @@ class IndexController extends AbstractActionController
      */
     public function indexAction()
     {
-      /*OWN CODE*/
+
       $quotetext = "";
       $author = "";
 
-
-      $userid = 0;
-      //check if user is logged in
-      if ($this->identity()!=null)
+      $user = $this->currentUser();
+      if ($user != null)
       {
-        //find user by email
-        $user = $this->entityManager->getRepository(User::class)
-                ->findOneByEmail($this->identity());
-        //get user ID
-        $userid = $user->getId();
+        $quote = $this->randomQuote($user->getId());
+        if ($quote != null)
+        {
+          $quotetext = $quote['u_quote'];
+          $author = $quote['u_author'];
+        }
+
       }
 
-      //$quote = $this->entityManager->getRepository(Quote::class)
-      //          ->findRandomQuoteByUser($userid);
-      //echo $quote;
-      //$author = $quote->getAuthor();
-      //$quotetext = $quote->getQuote();
 
-      /*END OF OWN CODE*/
 
         //$quote = 'Im więcej potu na poligonie, tym mniej krwi na polu walki.';
         //$author = 'Witold Anusz';

@@ -7,7 +7,7 @@ use Quote\Controller\QuoteController;
 use Quote\Service\QuoteManager;
 
 /**
- * This is the factory for UserController. Its purpose is to instantiate the
+ * This is the factory for QuoteController. Its purpose is to instantiate the
  * controller and inject dependencies into it.
  */
 class QuoteControllerFactory implements FactoryInterface

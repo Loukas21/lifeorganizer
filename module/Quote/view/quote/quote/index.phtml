@@ -24,13 +24,13 @@ $this->pageBreadcrumbs()->setItems([
 
 <table id="quote-table" class="table table-striped small table-responsive">
 
-   <tr>
+   <thead>
         <!--<th>ID</th>-->
         <th>Autor</th>
         <th>Cytat</th>
         <th>Akcje</th>
-    </tr>
-
+    </thead>
+    <tbody>
     <?php foreach ($quotes as $quote): ?>
 
     <tr>
@@ -59,10 +59,10 @@ $this->pageBreadcrumbs()->setItems([
     </tr>
 
     <?php endforeach; ?>
-
+</tbody>
 </table>
 
-<?= $this->paginationControl($quotes,
-                    'Sliding',
-                    'quote/partial/paginator',
-                    array('route' => 'quotes')); ?>
+<!-- $this->paginationControl($quotes,
+                  //  'Sliding',
+                  //  'quote/partial/paginator',
+                  //  array('route' => 'quotes')); -->

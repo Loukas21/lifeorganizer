@@ -16,7 +16,11 @@ $form->get('submit')
 $form->prepare();
 ?>
 
-<h3>Edycja uprawnień roli <?= $this->escapeHtml($role->getName()) ?></h3>
+<div class="app-content-title">
+  <h3>Edycja uprawnień roli</h3>
+  <h6><?= $this->escapeHtml($role->getName()) ?></h6>
+</div>
+
 
 <div class="row">
     <div class="col-md-8">

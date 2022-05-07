@@ -9,7 +9,7 @@ $this->pageBreadcrumbs()->setItems([
             ]);
 ?>
 
-<h3>Zarządzanie cytatami</h3>
+<h3 class="app-content-title">Zarządzanie cytatami</h3>
 
 <?= $this->flashMessenger()->render('error', ['alert', 'alert-warning']); ?>
 <?= $this->flashMessenger()->render('success', ['alert', 'alert-success']); ?>
@@ -22,7 +22,7 @@ $this->pageBreadcrumbs()->setItems([
 </a>
 </p>
 
-<table id="quote-table" class="table table-striped small table-responsive">
+<table class="table table-striped small table-responsive app-data-table">
 
    <thead>
         <!--<th>ID</th>-->

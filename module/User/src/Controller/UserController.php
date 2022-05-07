@@ -57,7 +57,7 @@ class UserController extends AbstractActionController
 
         $adapter = new DoctrineAdapter(new ORMPaginator($query, false));
         $paginator = new Paginator($adapter);
-        $paginator->setDefaultItemCountPerPage(3);
+        $paginator->setDefaultItemCountPerPage(100);
         $paginator->setCurrentPageNumber($page);
 
         return new ViewModel([

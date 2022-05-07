@@ -9,7 +9,7 @@ $this->pageBreadcrumbs()->setItems([
             ]);
 ?>
 
-<h3>Zarządzanie użytkownikami</h3>
+<h3 class="app-content-title">Zarządzanie użytkownikami</h3>
 
 <p>
 <a class="btn btn-secondary btn-sm" href="
@@ -18,9 +18,9 @@ $this->pageBreadcrumbs()->setItems([
 </a>
 </p>
 
-<table class="table table-striped small table-responsive">
+<table class="table table-striped small table-responsive app-data-table">
 
-   <tr>
+   <thead>
         <!--<th>ID</th>-->
         <th>Nazwa</th>
         <th>E-mail</th>
@@ -28,8 +28,8 @@ $this->pageBreadcrumbs()->setItems([
         <!--<th>Utworzony</th>-->
         <th>Status</th>
         <th>Akcje</th>
-    </tr>
-
+    </thead>
+    <tbody>
     <?php foreach ($users as $user): ?>
 
     <tr>
@@ -60,10 +60,5 @@ $this->pageBreadcrumbs()->setItems([
     </tr>
 
     <?php endforeach; ?>
-
+</tbody>
 </table>
-
-<?= $this->paginationControl($users,
-                    'Sliding',
-                    'user/partial/paginator',
-                    array('route' => 'users')); ?>

@@ -31,7 +31,11 @@ $form->get('submit')
 $form->prepare();
 ?>
 
-<h3>Edycja roli <?= $this->escapeHtml($role->getName()) ?></h3>
+<div class="app-content-title">
+  <h3>Edycja roli</h3>
+  <h6><?= $this->escapeHtml($role->getName()) ?></h6>
+</div>
+
 
 <p>
 <a class="btn btn-secondary btn-sm" href="<?= $this->url('roles', ['action'=>'editPermissions', 'id'=>$role->getId()]) ?>">

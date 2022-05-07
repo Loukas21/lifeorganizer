@@ -57,7 +57,7 @@ class QuoteController extends AbstractActionController
 
     $adapter = new DoctrineAdapter(new ORMPaginator($query, false));
     $paginator = new Paginator($adapter);
-    $paginator->setDefaultItemCountPerPage(100);
+    $paginator->setDefaultItemCountPerPage(10000);
     $paginator->setCurrentPageNumber($page);
 
     return new ViewModel([

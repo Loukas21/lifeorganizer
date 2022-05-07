@@ -10,8 +10,12 @@ $this->pageBreadcrumbs()->setItems([
             ]);
 ?>
 
+<div class="app-content-title">
+  <h3>Podgląd roli</h3>
+  <h6><?= $this->escapeHtml($role->getName()) ?></h6>
+</div>
 
-<h3>Podgląd roli <?= $this->escapeHtml($role->getName()) ?></h3>
+
 
 <?= $this->flashMessenger()->render('error', ['alert', 'alert-warning']); ?>
 <?= $this->flashMessenger()->render('success', ['alert', 'alert-success']); ?>

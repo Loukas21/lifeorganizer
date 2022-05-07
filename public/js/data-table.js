@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('#quote-table').DataTable({
+    $('.app-data-table').DataTable({
       "language": {
         "paginate": {
           "previous": "Poprzednia",

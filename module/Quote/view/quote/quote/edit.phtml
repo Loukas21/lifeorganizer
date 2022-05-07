@@ -1,5 +1,5 @@
 <?php
-$this->headTitle('Edit Quote');
+$this->headTitle('Edycja cytatu');
 
 $this->mainMenu()->setActiveItemId('quotes');
 
@@ -11,22 +11,22 @@ $this->pageBreadcrumbs()->setItems([
 
 $form->get('quote')->setAttributes([
     'class'=>'form-control',
-    'placeholder'=>'Name Surname'
+    'placeholder'=>'wpisz autora'
     ]);
 
 $form->get('quote')->setAttributes([
     'class'=>'form-control',
-    'placeholder'=>'Quote Text'
+    'placeholder'=>'wpisz cytat'
     ]);
 
 $form->get('submit')
-        ->setAttributes(['class'=>'btn btn-primary'])
-        ->setValue('Save');
+        ->setAttributes(['class'=>'btn btn-primary btn-sm'])
+        ->setValue('Zapisz');
 
 $form->prepare();
 ?>
 
-<h1>Edit Quote</h1>
+<h3>Edycja cytatu</h3>
 
 <div class="row">
     <div class="col-md-6">

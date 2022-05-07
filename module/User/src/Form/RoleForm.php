@@ -11,61 +11,61 @@ use User\Validator\RoleExistsValidator;
 class RoleForm extends Form
 {
     private $scenario;
-    
+
     private $entityManager;
-    
+
     private $role;
-    
+
     /**
-     * Constructor.     
+     * Constructor.
      */
     public function __construct($scenario='create', $entityManager = null, $role = null)
     {
         $this->scenario = $scenario;
         $this->entityManager = $entityManager;
         $this->role = $role;
-        
+
         // Define form name
         parent::__construct('role-form');
-     
+
         // Set POST method for this form
         $this->setAttribute('method', 'post');
-        
+
         $this->addElements();
-        $this->addInputFilter();          
+        $this->addInputFilter();
     }
-    
+
     /**
      * This method adds elements to form (input fields and submit button).
      */
-    protected function addElements() 
+    protected function addElements()
     {
         // Add "name" field
-        $this->add([           
+        $this->add([
             'type'  => 'text',
             'name' => 'name',
             'attributes' => [
                 'id' => 'name'
             ],
             'options' => [
-                'label' => 'Role Name',
+                'label' => 'Nazwa roli',
             ],
         ]);
-        
+
         // Add "description" field
-        $this->add([            
+        $this->add([
             'type'  => 'textarea',
             'name' => 'description',
             'attributes' => [
                 'id' => 'description'
             ],
             'options' => [
-                'label' => 'Description',
+                'label' => 'Opis',
             ],
         ]);
-        
+
         // Add "inherit_roles" field
-        $this->add([            
+        $this->add([
             'type'  => 'select',
             'name' => 'inherit_roles',
             'attributes' => [
@@ -73,20 +73,20 @@ class RoleForm extends Form
                 'multiple' => 'multiple',
             ],
             'options' => [
-                'label' => 'Optionally inherit permissions from these role(s)'
+                'label' => 'Dziedziczy uprawnienia z ról (opcjonalne):'
             ],
         ]);
-                        
+
         // Add the Submit button
         $this->add([
             'type'  => 'submit',
             'name' => 'submit',
-            'attributes' => [                
-                'value' => 'Create',
+            'attributes' => [
+                'value' => 'Utwórz',
                 'id' => 'submit',
             ],
         ]);
-        
+
         // Add the CSRF field
         $this->add([
             'type' => 'csrf',
@@ -98,22 +98,22 @@ class RoleForm extends Form
             ],
         ]);
     }
-    
+
     /**
      * This method creates input filter (used for form filtering/validation).
      */
-    private function addInputFilter() 
+    private function addInputFilter()
     {
         // Create input filter
-        $inputFilter = $this->getInputFilter();        
-        
+        $inputFilter = $this->getInputFilter();
+
         // Add input for "name" field
         $inputFilter->add([
                 'name'     => 'name',
                 'required' => true,
                 'filters'  => [
-                    ['name' => 'StringTrim'],                    
-                ],                
+                    ['name' => 'StringTrim'],
+                ],
                 'validators' => [
                     [
                         'name'    => 'StringLength',
@@ -130,15 +130,15 @@ class RoleForm extends Form
                         ],
                     ],
                 ],
-            ]);                          
-        
+            ]);
+
         // Add input for "description" field
         $inputFilter->add([
                 'name'     => 'description',
                 'required' => true,
                 'filters'  => [
-                    ['name' => 'StringTrim'],                    
-                ],                
+                    ['name' => 'StringTrim'],
+                ],
                 'validators' => [
                     [
                         'name'    => 'StringLength',
@@ -148,18 +148,18 @@ class RoleForm extends Form
                         ],
                     ],
                 ],
-            ]);                  
-        
+            ]);
+
         // Add input for "inherit_roles" field
         $inputFilter->add([
                 'name'     => 'inherit_roles',
                 'required' => false,
                 'filters'  => [
-                                    
-                ],                
-                'validators' => [
-                    
+
                 ],
-            ]);                  
-    }           
+                'validators' => [
+
+                ],
+            ]);
+    }
 }

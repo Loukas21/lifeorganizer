@@ -1,5 +1,5 @@
 <?php
-$this->headTitle('Add User');
+$this->headTitle('Dodawanie użytkownika');
 
 $this->mainMenu()->setActiveItemId('users');
 
@@ -25,28 +25,24 @@ $form->get('status')->setAttributes([
 
 $form->get('password')->setAttributes([
     'class'=>'form-control',
-    'placeholder'=>'Enter password',
+    'placeholder'=>'Wpisz hasło',
     ]);
 
 $form->get('confirm_password')->setAttributes([
     'class'=>'form-control',
-    'placeholder'=>'Retype password',
+    'placeholder'=>'Powtórz hasło',
     ]);
 
 $form->get('roles')->setAttributes([
     'class'=>'form-control'
     ]);
 
-$form->get('submit')->setAttributes(['class'=>'btn btn-primary']);
+$form->get('submit')->setAttributes(['class'=>'btn btn-primary btn-sm']);
 
 $form->prepare();
 ?>
 
-<h1>Add User</h1>
-
-<p>
-    Please fill out the following form and click the <i>Create</i> button.
-</p>
+<h3>Dodawanie użytkownika</h3>
 
 <div class="row">
     <div class="col-md-6">

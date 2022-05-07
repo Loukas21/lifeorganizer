@@ -173,7 +173,7 @@ class QuoteController extends AbstractActionController
       $this->quoteManager->deleteQuote($quote);
 
       // Add a flash message.
-      $this->flashMessenger()->addSuccessMessage('Deleted the quote.');
+      $this->flashMessenger()->addSuccessMessage('Cytat został usunięty.');
 
       // Redirect to "index" page
       return $this->redirect()->toRoute('quotes', ['action'=>'index']);

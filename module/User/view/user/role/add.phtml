@@ -1,5 +1,5 @@
 <?php
-$this->headTitle('Add Role');
+$this->headTitle('Dodawanie roli');
 
 $this->mainMenu()->setActiveItemId('roles');
 
@@ -11,28 +11,24 @@ $this->pageBreadcrumbs()->setItems([
 
 $form->get('name')->setAttributes([
     'class'=>'form-control',
-    'placeholder'=>'Enter name'
+    'placeholder'=>'wpisz nazwę roli'
     ]);
 
 $form->get('description')->setAttributes([
     'class'=>'form-control',
-    'placeholder'=>'Enter description'
+    'placeholder'=>'wpisz opis roli'
     ]);
 
 $form->get('inherit_roles')->setAttributes([
     'class'=>'form-control',
     ]);
 
-$form->get('submit')->setAttributes(['class'=>'btn btn-primary']);
+$form->get('submit')->setAttributes(['class'=>'btn btn-primary btn-sm']);
 
 $form->prepare();
 ?>
 
-<h1>Add Role</h1>
-
-<p>
-    Please fill out the following form and click the <i>Create</i> button.
-</p>
+<h3>Dodawanie roli</h3>
 
 <div class="row">
     <div class="col-md-6">

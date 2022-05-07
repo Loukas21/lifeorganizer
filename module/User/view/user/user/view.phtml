@@ -1,5 +1,5 @@
 <?php
-$this->headTitle('View User');
+$this->headTitle('Podgląd użytkownika');
 
 $this->mainMenu()->setActiveItemId('users');
 
@@ -14,36 +14,36 @@ $this->pageBreadcrumbs()->setItems([
 <?= $this->flashMessenger()->render('success', ['alert', 'alert-success']); ?>
 <?= $this->flashMessenger()->render('info', ['alert', 'alert-info']); ?>
 
-<h1>View User <?= $this->escapeHtml($user->getEmail()) ?></h1>
+<h3>Podgląd użytkownika <?= $this->escapeHtml($user->getEmail()) ?></h3>
 
 <p>
-    <a class="btn btn-default" href="<?= $this->url('users',
+    <a class="btn btn-secondary btn-sm" href="<?= $this->url('users',
             ['action'=>'edit', 'id'=>$user->getId()]); ?>">
-        <span class="glyphicon glyphicon-pencil" ></span> Edit
+        <span class="glyphicon glyphicon-pencil" ></span> Edytuj
     </a>
-    <a class="btn btn-default" href="<?= $this->url('users',
+    <a class="btn btn-secondary btn-sm" href="<?= $this->url('users',
             ['action'=>'change-password', 'id'=>$user->getId()]); ?>">
-        <span class="glyphicon glyphicon-asterisk"></span> Change Password
+        <span class="glyphicon glyphicon-asterisk"></span> Zmień hasło
     </a>
 </p>
 
 <div class="row">
     <div class="col-md-6">
-        <table class="table table-striped table-bordered">
+        <table class="table table-striped table-bordered small table-responsive">
              <tr>
                 <th>ID:</th>
                 <td><?= $this->escapeHtml($user->getId()) ?></th>
+            </tr>
+            <tr>
+                <th>Nazwa:</th>
+                <td><?= $this->escapeHtml($user->getFullName()) ?></th>
             </tr>
             <tr>
                 <th>E-mail:</th>
                 <td><?= $this->escapeHtml($user->getEmail()) ?></th>
             </tr>
             <tr>
-                <th>Full Name:</th>
-                <td><?= $this->escapeHtml($user->getFullName()) ?></th>
-            </tr>
-            <tr>
-                <th>Date Created:</th>
+                <th>Utworzony:</th>
                 <td><?= $this->escapeHtml($user->getDateCreated()) ?></th>
             </tr>
             <tr>
@@ -51,7 +51,7 @@ $this->pageBreadcrumbs()->setItems([
                 <td><?= $this->escapeHtml($user->getStatusAsString()) ?></th>
             </tr>
             <tr>
-                <th>Roles:</th>
+                <th>Role:</th>
                 <td><?= $this->escapeHtml($user->getRolesAsString()) ?></th>
             </tr>
         </table>

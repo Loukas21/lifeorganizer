@@ -1,5 +1,5 @@
 <?php
-$this->headTitle('Add Permission');
+$this->headTitle('Dodawanie uprawnienia');
 
 $this->mainMenu()->setActiveItemId('permissions');
 
@@ -11,24 +11,20 @@ $this->pageBreadcrumbs()->setItems([
 
 $form->get('name')->setAttributes([
     'class'=>'form-control',
-    'placeholder'=>'Enter name'
+    'placeholder'=>'wpisz nazwę'
     ]);
 
 $form->get('description')->setAttributes([
     'class'=>'form-control',
-    'placeholder'=>'Enter description'
+    'placeholder'=>'wpisz opis'
     ]);
 
-$form->get('submit')->setAttributes(['class'=>'btn btn-primary']);
+$form->get('submit')->setAttributes(['class'=>'btn btn-primary btn-sm']);
 
 $form->prepare();
 ?>
 
-<h1>Add Permission</h1>
-
-<p>
-    Please fill out the following form and click the <i>Create</i> button.
-</p>
+<h3>Dodawanie uprawnienia</h3>
 
 <div class="row">
     <div class="col-md-6">

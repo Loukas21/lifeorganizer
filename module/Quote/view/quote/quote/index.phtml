@@ -1,5 +1,5 @@
 <?php
-$this->headTitle('Quotes');
+$this->headTitle('Zarządzanie cytatami');
 
 $this->mainMenu()->setActiveItemId('quotes');
 
@@ -9,48 +9,52 @@ $this->pageBreadcrumbs()->setItems([
             ]);
 ?>
 
-<h1>Manage Quotes</h1>
+<h3>Zarządzanie cytatami</h3>
 
 <?= $this->flashMessenger()->render('error', ['alert', 'alert-warning']); ?>
 <?= $this->flashMessenger()->render('success', ['alert', 'alert-success']); ?>
 <?= $this->flashMessenger()->render('info', ['alert', 'alert-info']); ?>
 
 <p>
-<a class="btn btn-default" href="
+<a class="btn btn-secondary btn-sm" href="
     <?= $this->url('quotes', ['action'=>'add']); ?>">
-    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Quote
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Dodaj cytat
 </a>
 </p>
 
-<table class="table table-striped">
+<table class="table table-striped small table-responsive">
 
    <tr>
-        <th>ID</th>
-        <th>Author</th>
-        <th>Quote</th>
+        <!--<th>ID</th>-->
+        <th>Autor</th>
+        <th>Cytat</th>
+        <th>Akcje</th>
     </tr>
 
     <?php foreach ($quotes as $quote): ?>
 
     <tr>
-        <td><?= $this->escapeHtml($quote->getId()); ?></td>
+        <!--<td><?= $this->escapeHtml($quote->getId()); ?></td>-->
+
         <td>
-            <a href="<?= $this->url('quotes', ['action'=>'view', 'id'=>$quote->getId()]); ?>">
                 <?= $this->escapeHtml($quote->getAuthor()); ?>
-            </a>
         </td>
         <td>
+          <!--<a href="<?= $this->url('quotes', ['action'=>'view', 'id'=>$quote->getId()]); ?>">-->
             <?= $this->escapeHtml($quote->getQuote()); ?></a>
+            <!--</a>-->
         </td>
         <td>
-            <a class="btn btn-info" href="<?= $this->url('quotes',
+            <nobr>
+            <a class="btn btn-secondary btn-sm" href="<?= $this->url('quotes',
                     ['action'=>'edit', 'id'=>$quote->getId()]); ?>">
-                <span class="glyphicon glyphicon-pencil" ></span> Edit
+                <span class="glyphicon glyphicon-pencil" ></span> Edytuj
             </a>
-            <a class="btn btn-danger" href="<?= $this->url('quotes',
+            <a class="btn btn-secondary btn-sm" href="<?= $this->url('quotes',
                     ['action'=>'delete', 'id'=>$quote->getId()]); ?>">
-                <span class="glyphicon glyphicon-remove"></span> Delete
+                <span class="glyphicon glyphicon-remove"></span> Usuń
             </a>
+          </nobr>
         </td>
     </tr>
 

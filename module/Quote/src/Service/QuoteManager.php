@@ -80,7 +80,14 @@ class QuoteManager
 
     $quote = $quoteQuery->getResult(\Doctrine\ORM\Query::HYDRATE_SCALAR);
     $count = count($quote);
+    if ($count > 0)
+    {
     $selectedQuote = $quote[rand(0,$count-1)];
+    }
+    else
+    {
+      $selectedQuote = null;
+    }
 
     return $selectedQuote;
   }

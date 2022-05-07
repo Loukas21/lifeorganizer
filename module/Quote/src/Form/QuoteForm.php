@@ -60,7 +60,7 @@ class QuoteForm extends Form
             'type'  => 'text',
             'name' => 'author',
             'options' => [
-                'label' => 'Author',
+                'label' => 'Autor',
             ],
         ]);
 
@@ -69,7 +69,7 @@ class QuoteForm extends Form
             'type'  => 'textarea',
             'name' => 'quote',
             'options' => [
-                'label' => 'Quote',
+                'label' => 'Cytat',
             ],
             'attributes' => [
                 'id' => 'quote',
@@ -99,7 +99,7 @@ class QuoteForm extends Form
             'type'  => 'submit',
             'name' => 'submit',
             'attributes' => [
-                'value' => 'Create'
+                'value' => 'Utwórz'
             ],
         ]);
     }

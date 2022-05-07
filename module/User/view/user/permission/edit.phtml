@@ -1,5 +1,5 @@
 <?php
-$this->headTitle('Edit Permission');
+$this->headTitle('Edycja uprawnienia');
 
 $this->mainMenu()->setActiveItemId('permissions');
 
@@ -11,22 +11,22 @@ $this->pageBreadcrumbs()->setItems([
 
 $form->get('name')->setAttributes([
     'class'=>'form-control',
-    'placeholder'=>'Enter name'
+    'placeholder'=>'wpisz nazwę'
     ]);
 
 $form->get('description')->setAttributes([
     'class'=>'form-control',
-    'placeholder'=>'Enter description'
+    'placeholder'=>'wpisz opis'
     ]);
 
 $form->get('submit')
-        ->setAttributes(['class'=>'btn btn-primary'])
-        ->setValue('Save');
+        ->setAttributes(['class'=>'btn btn-primary btn-sm'])
+        ->setValue('Zapisz');
 
 $form->prepare();
 ?>
 
-<h1>Edit Permission</h1>
+<h3>Edycja uprawnienia</h3>
 
 <div class="row">
     <div class="col-md-6">

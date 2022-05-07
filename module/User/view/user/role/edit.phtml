@@ -1,5 +1,5 @@
 <?php
-$this->headTitle('Edit Role');
+$this->headTitle('Edycja roli');
 
 $this->mainMenu()->setActiveItemId('roles');
 
@@ -11,12 +11,12 @@ $this->pageBreadcrumbs()->setItems([
 
 $form->get('name')->setAttributes([
     'class'=>'form-control',
-    'placeholder'=>'Enter name'
+    'placeholder'=>'wpisz nazwę roli'
     ]);
 
 $form->get('description')->setAttributes([
     'class'=>'form-control',
-    'placeholder'=>'Enter description'
+    'placeholder'=>'wpisz opis roli'
     ]);
 
 $form->get('inherit_roles')->setAttributes([
@@ -25,17 +25,17 @@ $form->get('inherit_roles')->setAttributes([
 
 
 $form->get('submit')
-        ->setAttributes(['class'=>'btn btn-primary'])
-        ->setValue('Save');
+        ->setAttributes(['class'=>'btn btn-primary btn-sm'])
+        ->setValue('Zapisz');
 
 $form->prepare();
 ?>
 
-<h1>Edit Role <?= $this->escapeHtml($role->getName()) ?></h1>
+<h3>Edycja roli <?= $this->escapeHtml($role->getName()) ?></h3>
 
 <p>
-<a class="btn btn-default" href="<?= $this->url('roles', ['action'=>'editPermissions', 'id'=>$role->getId()]) ?>">
-  <span class="glyphicon glyphicon-check"></span> Edit Permissions
+<a class="btn btn-secondary btn-sm" href="<?= $this->url('roles', ['action'=>'editPermissions', 'id'=>$role->getId()]) ?>">
+  <span class="glyphicon glyphicon-check"></span> Edytuj uprawnienia
 </a>
 </p>
 

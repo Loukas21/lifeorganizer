@@ -1,11 +1,11 @@
 <?php
-$this->headTitle('Sign in');
+$this->headTitle('Logowanie');
 
 $this->mainMenu()->setActiveItemId('login');
 
 $form->get('email')->setAttributes([
-    'class'=>'form-control', 
-    'placeholder'=>'Email address',
+    'class'=>'form-control',
+    'placeholder'=>'adres email',
     'required' => true,
     'autofocus' => true
     ])
@@ -14,8 +14,8 @@ $form->get('email')->setAttributes([
     ]);
 
 $form->get('password')->setAttributes([
-    'class'=>'form-control', 
-    'placeholder'=>'Password',
+    'class'=>'form-control',
+    'placeholder'=>'hasło',
     'required' => true,
     ])
     ->setLabelAttributes([
@@ -26,11 +26,11 @@ $form->get('password')->setAttributes([
 <div class="row">
     <div class="col-md-offset-4 col-md-3">
         <form class="form-signin" method="post">
-            <h2 class="form-signin-heading">Please sign in</h2>
+            <h2 class="form-signin-heading">Logowanie</h2>
             <?php if ($isLoginError): ?>
             <div class="alert alert-warning" role="alert">
-                Incorrect login and/or password. 
-                <a href="<?= $this->url('reset-password') ?>">Forgot password?</a>
+                Niepoprawny login lub hasło.
+                <a href="<?= $this->url('reset-password') ?>">Zapomniałeś hasła?</a>
             </div>
             <?php endif; ?>
             <?= $this->formLabel($form->get('email')); ?>
@@ -39,12 +39,12 @@ $form->get('password')->setAttributes([
             <?= $this->formElement($form->get('password')); ?>
             <div class="checkbox">
                 <label>
-                    <?= $this->formElement($form->get('remember_me')); ?> Remember me
+                    <?= $this->formElement($form->get('remember_me')); ?> Zapamiętaj mnie
                 </label>
             </div>
             <?= $this->formElement($form->get('redirect_url')); ?>
             <?= $this->formElement($form->get('csrf')) ?>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <button class="btn btn-lg btn-primary small btn-block btn-sm" type="submit">Zaloguj się</button>
         </form>
     </div>
 </div>

@@ -249,10 +249,10 @@ class UserController extends AbstractActionController
                 // Try to change password.
                 if (!$this->userManager->changePassword($user, $data)) {
                     $this->flashMessenger()->addErrorMessage(
-                            'Sorry, the old password is incorrect. Could not set the new password.');
+                            'Stare hasło nieprawidłowe. Nie udało się zmienić hasła.');
                 } else {
                     $this->flashMessenger()->addSuccessMessage(
-                            'Changed the password successfully.');
+                            'Hasło zmienione poprawnie.');
                 }
 
                 // Redirect to "view" page

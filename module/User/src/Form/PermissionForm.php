@@ -11,69 +11,69 @@ use User\Validator\PermissionExistsValidator;
 class PermissionForm extends Form
 {
     private $scenario;
-    
+
     private $entityManager;
-    
+
     private $permission;
-    
+
     /**
-     * Constructor.     
+     * Constructor.
      */
     public function __construct($scenario = 'create', $entityManager = null, $permission = null)
     {
         $this->scenario = $scenario;
         $this->entityManager = $entityManager;
         $this->permission = $permission;
-        
+
         // Define form name
         parent::__construct('permission-form');
-     
+
         // Set POST method for this form
         $this->setAttribute('method', 'post');
-        
+
         $this->addElements();
-        $this->addInputFilter();          
+        $this->addInputFilter();
     }
-    
+
     /**
      * This method adds elements to form (input fields and submit button).
      */
-    protected function addElements() 
+    protected function addElements()
     {
         // Add "name" field
-        $this->add([           
+        $this->add([
             'type'  => 'text',
             'name' => 'name',
             'attributes' => [
                 'id' => 'name'
             ],
             'options' => [
-                'label' => 'Permission Name',
+                'label' => 'Nazwa',
             ],
         ]);
-        
+
         // Add "description" field
-        $this->add([            
+        $this->add([
             'type'  => 'textarea',
             'name' => 'description',
             'attributes' => [
                 'id' => 'description'
             ],
             'options' => [
-                'label' => 'Description',
+                'label' => 'Opis',
             ],
         ]);
-        
+
         // Add the Submit button
         $this->add([
             'type'  => 'submit',
             'name' => 'submit',
-            'attributes' => [                
-                'value' => 'Create',
+            'attributes' => [
+                'value' => 'Utwórz',
                 'id' => 'submit',
             ],
         ]);
-        
+
         // Add the CSRF field
         $this->add([
             'type' => 'csrf',
@@ -85,22 +85,22 @@ class PermissionForm extends Form
             ],
         ]);
     }
-    
+
     /**
      * This method creates input filter (used for form filtering/validation).
      */
-    private function addInputFilter() 
+    private function addInputFilter()
     {
         // Create input filter
         $inputFilter = $this->getInputFilter();
-        
+
         // Add input for "name" field
         $inputFilter->add([
                 'name'     => 'name',
                 'required' => true,
                 'filters'  => [
-                    ['name' => 'StringTrim'],                    
-                ],                
+                    ['name' => 'StringTrim'],
+                ],
                 'validators' => [
                     [
                         'name'    => 'StringLength',
@@ -115,17 +115,17 @@ class PermissionForm extends Form
                             'entityManager' => $this->entityManager,
                             'permission' => $this->permission
                         ],
-                    ], 
+                    ],
                 ],
-            ]);                          
-        
+            ]);
+
         // Add input for "description" field
         $inputFilter->add([
                 'name'     => 'description',
                 'required' => true,
                 'filters'  => [
-                    ['name' => 'StringTrim'],                    
-                ],                
+                    ['name' => 'StringTrim'],
+                ],
                 'validators' => [
                     [
                         'name'    => 'StringLength',
@@ -135,7 +135,6 @@ class PermissionForm extends Form
                         ],
                     ],
                 ],
-            ]);                                    
-    }           
+            ]);
+    }
 }
-

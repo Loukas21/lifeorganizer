@@ -115,6 +115,10 @@ body
   box-shadow: none;
 }
 
+.dataTables_info {
+  font-size: 12px;
+}
+
 .link-light:hover {
   color: #212529;
 }

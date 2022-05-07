@@ -103,8 +103,42 @@ body
   color: #777;
 }
 
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 .link-light:hover {
   color: #212529;
+}
+
+.page-link {
+  color: #fff;
+  background-color: #6c757d;
+  border-radius: .2rem;
+}
+
+.page-link:focus {
+  outline: none;
+  box-shadow: none;
+  background-color: #5c636a;
+  border-color: #565e64;
+}
+
+.page-link:hover {
+  color: #fff;
+  background-color: #5c636a;
+  border-color: #565e64;
+}
+
+.page-item.active .page-link {
+  color: #fff;
+  background-color: #5c636a;
+  border: none;
+}
+
+.pagination {
+  font-size: 12px;
 }
 
 #quote {

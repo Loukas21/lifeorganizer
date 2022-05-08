@@ -9,7 +9,8 @@ $(document).ready(function() {
         "lengthMenu": "Pokaż _MENU_ rekordów",
         "info": "Wyświetlane rekordy _START_-_END_ / _TOTAL_",
         "infoEmpty": "Wyświetlane rekordy 0-0 / 0",
-        "infoFiltered": "(wyfiltrowane z _MAX_)"
+        "infoFiltered": "(wyfiltrowane z _MAX_)",
+        "zeroRecords": "Nie znaleziono rekordów"
     }
   });
 } );

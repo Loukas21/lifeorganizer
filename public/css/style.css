@@ -134,6 +134,7 @@ body
   box-shadow: none;
   background-color: #5c636a;
   border-color: #565e64;
+  color: #fff;
 }
 
 .page-link:hover {

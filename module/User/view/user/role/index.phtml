@@ -51,7 +51,7 @@ $this->pageBreadcrumbs()->setItems([
                 <span class="glyphicon glyphicon-pencil" ></span> Edytuj
             </a>
             <a class="btn btn-secondary btn-sm" href="<?= $this->url('roles',
-                    ['action'=>'delete', 'id'=>$role->getId()]); ?>">
+                    ['action'=>'delete', 'id'=>$role->getId()]); ?>" onclick="return confirm ('Czy na pewno chcesz usunąć ten rekord?')">
                 <span class="glyphicon glyphicon-remove"></span> Usuń
             </a>
             </nobr>

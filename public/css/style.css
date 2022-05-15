@@ -3,6 +3,10 @@ body
   font-family: Papyrus, serif;
 }
 
+.alert > ul {
+  list-style-type:none;
+}
+
 .app-content-title {
   margin-top: 10px;
   margin-bottom: 25px;

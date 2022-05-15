@@ -1,10 +1,10 @@
 <?php
 namespace Quote\Form;
 
-use Zend\Form\Form;
-use Zend\Form\Fieldset;
-use Zend\InputFilter\InputFilter;
-use Zend\InputFilter\ArrayInput;
+use Laminas\Form\Form;
+use Laminas\Form\Fieldset;
+use Laminas\InputFilter\InputFilter;
+use Laminas\InputFilter\ArrayInput;
 
 /**
  * This form is used to collect quote's author, quote text. The form
@@ -132,7 +132,7 @@ class QuoteForm extends Form
 
         // Add input for "quote" field
         $inputFilter->add([
-                'name'     => 'author',
+                'name'     => 'quote',
                 'required' => true,
                 'filters'  => [
                     ['name' => 'StringTrim'],

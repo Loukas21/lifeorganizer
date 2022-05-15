@@ -2,7 +2,7 @@
 namespace User\Controller\Factory;
 
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 use User\Controller\RoleController;
 use User\Service\RoleManager;
 
@@ -16,9 +16,8 @@ class RoleControllerFactory implements FactoryInterface
     {
         $entityManager = $container->get('doctrine.entitymanager.orm_default');
         $roleManager = $container->get(RoleManager::class);
-        
+
         // Instantiate the controller and inject dependencies
         return new RoleController($entityManager, $roleManager);
     }
 }
-

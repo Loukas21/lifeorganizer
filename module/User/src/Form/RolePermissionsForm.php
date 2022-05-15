@@ -1,10 +1,10 @@
 <?php
 namespace User\Form;
 
-use Zend\Form\Form;
-use Zend\Form\Fieldset;
-use Zend\InputFilter\InputFilter;
-use Zend\InputFilter\ArrayInput;
+use Laminas\Form\Form;
+use Laminas\Form\Fieldset;
+use Laminas\InputFilter\InputFilter;
+use Laminas\InputFilter\ArrayInput;
 use User\Validator\PermissionExistsValidator;
 
 /**
@@ -13,43 +13,43 @@ use User\Validator\PermissionExistsValidator;
 class RolePermissionsForm extends Form
 {
     private $entityManager;
-    
+
     /**
-     * Constructor.     
+     * Constructor.
      */
     public function __construct($entityManager)
     {
         $this->entityManager = $entityManager;
-        
+
         // Define form name
         parent::__construct('role-permissions-form');
-     
+
         // Set POST method for this form
         $this->setAttribute('method', 'post');
-        
+
         $this->addElements();
-        $this->addInputFilter();          
+        $this->addInputFilter();
     }
-    
+
     /**
      * This method adds elements to form (input fields and submit button).
      */
-    protected function addElements() 
+    protected function addElements()
     {
         // Add a fieldset for permissions
         $fieldset = new Fieldset('permissions');
         $this->add($fieldset);
-        
+
         // Add the Submit button
         $this->add([
             'type'  => 'submit',
             'name' => 'submit',
-            'attributes' => [                
+            'attributes' => [
                 'value' => 'Create',
                 'id' => 'submit',
             ],
         ]);
-        
+
         // Add the CSRF field
         $this->add([
             'type' => 'csrf',
@@ -61,11 +61,11 @@ class RolePermissionsForm extends Form
             ],
         ]);
     }
-    
+
     public function addPermissionField($name, $label, $isDisabled = false)
     {
         // Add a permission field
-        $this->get('permissions')->add([            
+        $this->get('permissions')->add([
             'type'  => 'checkbox',
             'name' => $name,
             'attributes' => [
@@ -76,27 +76,27 @@ class RolePermissionsForm extends Form
                 'label' => $label
             ],
         ]);
-        
-        // Add input 
+
+        // Add input
         $this->getInputFilter()->get('permissions')->add([
                 'name'     => $name,
                 'required' => false,
-                'filters'  => [                    
-                ],                
+                'filters'  => [
+                ],
                 'validators' => [
                     ['name' => 'IsInt'],
                 ],
-            ]);  
+            ]);
     }
-    
+
     /**
      * This method creates input filter (used for form filtering/validation).
      */
-    private function addInputFilter() 
+    private function addInputFilter()
     {
         // Create input filter
-        $inputFilter = $this->getInputFilter();        
-        
-             
-    }           
+        $inputFilter = $this->getInputFilter();
+
+
+    }
 }

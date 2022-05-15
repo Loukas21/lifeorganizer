@@ -1,7 +1,7 @@
 <?php
 namespace Quote\Controller\Plugin;
 
-use Zend\Mvc\Controller\Plugin\AbstractPlugin;
+use Laminas\Mvc\Controller\Plugin\AbstractPlugin;
 
 /**
  * This controller plugin is used for role-based access control (RBAC).
@@ -14,7 +14,7 @@ class RandomQuotePlugin extends AbstractPlugin
     {
         $this->quoteManager = $quoteManager;
     }
-    
+
     public function __invoke($userid)
     {
         return $this->quoteManager->getRandomQuoteByUserId($userid);

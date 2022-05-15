@@ -6,34 +6,41 @@
     "keywords": [
         "framework",
         "mvc",
-        "zf2"
+        "zf3"
     ],
     "homepage": "http://framework.zend.com/",
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": "^5.6 || ^7.0",
-        "ext-gd": "*",
-        "ext-intl": "*",
-        "zendframework/zend-component-installer": "^1.0 || ^0.5 || ^1.0.0-dev@dev",
-        "zendframework/zend-mvc": "^3.1",
-        "zfcampus/zf-development-mode": "^3.0",
-        "zendframework/zend-mvc-form": "^1.0",
-        "zendframework/zend-mvc-plugins": "^1.0.1",
-        "zendframework/zend-session": "^2.7.1",
-        "zendframework/zend-authentication": "^2.5",
-        "doctrine/migrations": "^1.8",
-        "zendframework/zend-math": "^3.0",
-        "zendframework/zend-crypt": "^3.1",
-        "zendframework/zend-captcha": "^2.6",
-        "zendframework/zend-mail": "^2.10",
-        "zendframework/zend-mime": "^2.7",
-        "doctrine/doctrine-orm-module": "^1.1.5",
-        "doctrine/migrations": "^1.5",
-        "zendframework/zend-cache": "^2.7",
-        "zendframework/zend-serializer": "^2.8",
-        "zendframework/zend-permissions-rbac": "^2.5",
-        "zendframework/zend-developer-tools":"^1.0"
+  	  "php": "^5.6 || ^7.0",
+  	  "ext-gd": "*",
+  	  "ext-intl": "*",
+      "laminas/laminas-authentication": "^2.5",
+      "laminas/laminas-cache": "^2.7",
+      "laminas/laminas-captcha": "^2.6",
+  	  "laminas/laminas-component-installer": "^1.0 || ^2.1",
+      "laminas/laminas-crypt": "^3.1",
+      "laminas/laminas-db": "^2.10",
+      "laminas/laminas-developer-tools":"^1.0",
+      "laminas/laminas-development-mode": "^3.2",
+      "laminas/laminas-form": "^2.14",
+      "laminas/laminas-i18n": "^2.6",
+      "laminas/laminas-mail": "^2.10",
+      "laminas/laminas-math": "^3.0",
+      "laminas/laminas-mime": "^2.7",
+      "laminas/laminas-modulemanager": "2.8.4",
+  	  "laminas/laminas-mvc": "^3.3",
+  	  "laminas/laminas-mvc-form": "^1.0",
+  	  "laminas/laminas-mvc-plugins": "^1.0.1",
+      "laminas/laminas-navigation": "^2.9",
+      "laminas/laminas-paginator": "^2.8",
+      "laminas/laminas-permissions-rbac": "^2.5",
+  	  "laminas/laminas-serializer": "^2.8",
+  	  "laminas/laminas-session": "^2.0",
+  	  "laminas/laminas-test": "^3 || ^4",
+  	  "doctrine/doctrine-orm-module": "^4",
+  	  "doctrine/migrations": "^3",
+  	  "phpunit/phpunit": "^9"
     },
     "autoload": {
         "psr-4": {
@@ -54,6 +61,9 @@
         "development-disable": "zf-development-mode disable",
         "development-enable": "zf-development-mode enable",
         "development-status": "zf-development-mode status",
-        "serve": "php -S 0.0.0.0:8080 -t public/ public/index.php"
+        "serve": "php -S 0.0.0.0:8080 -t public/ public/index.php",
+        "test": "phpunit"
+    },
+    "require-dev": {
     }
 }

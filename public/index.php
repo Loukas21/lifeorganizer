@@ -1,8 +1,7 @@
 <?php
 
-use Zend\Mvc\Application;
-use Zend\Stdlib\ArrayUtils;
-
+use Laminas\Mvc\Application;
+use Laminas\Stdlib\ArrayUtils;
 
 error_reporting(E_ALL);
 ini_set("display_errors", 1);

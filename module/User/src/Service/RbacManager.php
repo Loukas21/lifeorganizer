@@ -1,8 +1,8 @@
 <?php
 namespace User\Service;
 
-use Zend\Permissions\Rbac\Rbac;
-use Zend\Permissions\Rbac\Role as RbacRole;
+use Laminas\Permissions\Rbac\Rbac;
+use Laminas\Permissions\Rbac\Role as RbacRole;
 use User\Entity\User;
 use User\Entity\Role;
 use User\Entity\Permission;
@@ -10,49 +10,49 @@ use User\Entity\Permission;
 /**
  * This service is responsible for initialzing RBAC (Role-Based Access Control).
  */
-class RbacManager 
+class RbacManager
 {
     /**
      * Doctrine entity manager.
      * @var Doctrine\ORM\EntityManager
      */
-    private $entityManager; 
-    
+    private $entityManager;
+
     /**
      * RBAC service.
-     * @var Zend\Permissions\Rbac\Rbac
+     * @var Laminas\Permissions\Rbac\Rbac
      */
     private $rbac;
-    
+
     /**
      * Auth service.
-     * @var Zend\Authentication\AuthenticationService 
+     * @var Laminas\Authentication\AuthenticationService
      */
     private $authService;
-    
+
     /**
      * Filesystem cache.
-     * @var Zend\Cache\Storage\StorageInterface
+     * @var Laminas\Cache\Storage\StorageInterface
      */
     private $cache;
-    
+
     /**
      * Assertion managers.
      * @var array
      */
     private $assertionManagers = [];
-    
+
     /**
      * Constructs the service.
      */
-    public function __construct($entityManager, $authService, $cache, $assertionManagers) 
+    public function __construct($entityManager, $authService, $cache, $assertionManagers)
     {
         $this->entityManager = $entityManager;
         $this->authService = $authService;
         $this->cache = $cache;
         $this->assertionManagers = $assertionManagers;
     }
-    
+
     /**
      * Initializes the RBAC container.
      */
@@ -62,12 +62,12 @@ class RbacManager
             // Already initialized; do nothing.
             return;
         }
-        
+
         // If user wants us to reinit RBAC container, clear cache now.
         if ($forceCreate) {
             $this->cache->removeItem('rbac_container');
         }
-        
+
         // Try to load Rbac container from cache.
         $result = false;
         $this->rbac = $this->cache->getItem('rbac_container', $result);
@@ -98,12 +98,12 @@ class RbacManager
                     $rbac->getRole($roleName)->addPermission($permission->getName());
                 }
             }
-            
+
             // Save Rbac container to cache.
             $this->cache->setItem('rbac_container', $rbac);
         }
     }
-    
+
     /**
      * Checks whether the given user has permission.
      * @param User|null $user
@@ -115,14 +115,14 @@ class RbacManager
         if ($this->rbac==null) {
             $this->init();
         }
-        
+
         if ($user==null) {
-            
+
             $identity = $this->authService->getIdentity();
             if ($identity==null) {
                 return false;
             }
-            
+
             $user = $this->entityManager->getRepository(User::class)
                     ->findOneByEmail($identity);
             if ($user==null) {
@@ -131,12 +131,12 @@ class RbacManager
                 throw new \Exception('There is no user with such identity');
             }
         }
-        
+
         $roles = $user->getRoles();
-        
+
         foreach ($roles as $role) {
             if ($this->rbac->isGranted($role->getName(), $permission)) {
-                
+
                 if ($params==null)
                     return true;
 
@@ -155,10 +155,7 @@ class RbacManager
                 }
             }
         }
-        
+
         return false;
     }
 }
-
-
-

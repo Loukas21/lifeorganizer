@@ -2,7 +2,7 @@
 namespace Quote\Controller\Factory;
 
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 use Quote\Controller\QuoteController;
 use Quote\Service\QuoteManager;
 

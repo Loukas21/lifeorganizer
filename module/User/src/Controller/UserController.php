@@ -1,11 +1,11 @@
 <?php
 namespace User\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
-use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
-use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
-use Zend\Paginator\Paginator;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\ViewModel;
+//use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
+//use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
+//use Laminas\Paginator\Paginator;
 use Application\Entity\Post;
 use User\Entity\User;
 use User\Entity\Role;
@@ -51,17 +51,11 @@ class UserController extends AbstractActionController
             $this->getResponse()->setStatusCode(401);
             return;
         }
-        $page = $this->params()->fromQuery('page', 1);
-        $query = $this->entityManager->getRepository(User::class)
-                ->findAllUsers();
-
-        $adapter = new DoctrineAdapter(new ORMPaginator($query, false));
-        $paginator = new Paginator($adapter);
-        $paginator->setDefaultItemCountPerPage(100);
-        $paginator->setCurrentPageNumber($page);
+        $users = $this->entityManager->getRepository(User::class)
+                ->findBy([], ['dateCreated'=>'DESC']);
 
         return new ViewModel([
-            'users' => $paginator
+            'users' => $users
         ]);
     }
 

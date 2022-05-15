@@ -5,13 +5,13 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace ApplicationTest\Controller;
+namespace QuoteTest\Controller;
 
-use Application\Controller\IndexController;
+use Quote\Controller\QuoteController;
 use Laminas\Stdlib\ArrayUtils;
 use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
-class IndexControllerTest extends AbstractHttpControllerTestCase
+class QuoteControllerTest extends AbstractHttpControllerTestCase
 {
     protected function setUp() : void
     {
@@ -31,12 +31,20 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
 
     public function testIndexActionCanBeAccessed()
     {
-        $this->dispatch('/', 'GET');
+        /*
+        $this->dispatch('/quote', 'GET');
         $this->assertResponseStatusCode(200);
-        $this->assertModuleName('application');
-        //$this->assertControllerName(IndexController::class); // as specified in router's controller name alias
-        $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('home');
+        $this->assertModuleName('quote');
+        $this->assertControllerName(QuoteController::class); // as specified in router's controller name alias
+        $this->assertControllerClass('QuoteController');
+        $this->assertMatchedRouteName('quote');
+        */
+        $this->dispatch('/quotes');
+        $this->assertResponseStatusCode(302);
+        $this->assertModuleName('quote');
+        $this->assertControllerName(QuoteController::class);
+        $this->assertControllerClass('QuoteController');
+        $this->assertMatchedRouteName('quotes');
     }
     /*
     public function testIndexActionViewModelTemplateRenderedWithinLayout()
@@ -44,11 +52,11 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->dispatch('/', 'GET');
         $this->assertQuery('.container .jumbotron');
     }
-
+    */
     public function testInvalidRouteDoesNotCrash()
     {
         $this->dispatch('/invalid/route', 'GET');
         $this->assertResponseStatusCode(404);
     }
-    */
+
 }

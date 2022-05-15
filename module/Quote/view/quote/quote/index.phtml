@@ -34,8 +34,6 @@ $this->pageBreadcrumbs()->setItems([
     <?php foreach ($quotes as $quote): ?>
 
     <tr>
-        <!--<td><?= $this->escapeHtml($quote->getId()); ?></td>-->
-
         <td>
                 <?= $this->escapeHtml($quote->getAuthor()); ?>
         </td>
@@ -61,8 +59,3 @@ $this->pageBreadcrumbs()->setItems([
     <?php endforeach; ?>
 </tbody>
 </table>
-
-<!-- $this->paginationControl($quotes,
-                  //  'Sliding',
-                  //  'quote/partial/paginator',
-                  //  array('route' => 'quotes')); -->

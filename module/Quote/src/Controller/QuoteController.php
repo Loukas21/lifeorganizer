@@ -2,11 +2,11 @@
 
 namespace Quote\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
-use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
-use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
-use Zend\Paginator\Paginator;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\ViewModel;
+//use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
+//use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
+//use Laminas\Paginator\Paginator;
 use User\Entity\User;
 use Application\Entity\Post;
 use Quote\Entity\Quote;
@@ -34,6 +34,11 @@ class QuoteController extends AbstractActionController
 
   public function indexAction()
   {
+    if (!$this->access('quotes.manage')){
+      $this->getResponse()->setStatusCode(401);
+      return;
+    }
+
     /*OWN CODE*/
     $userid = 0;
     //check if user is logged in
@@ -47,22 +52,11 @@ class QuoteController extends AbstractActionController
     }
     /*END OF OWN CODE*/
 
-    if (!$this->access('quotes.manage')){
-      $this->getResponse()->setStatusCode(401);
-      return;
-    }
-    $page = $this->params()->fromQuery('page', 1);
-    $query = $this->entityManager->getRepository(Quote::class)
-              ->findQuotesByUser($userid); //OWN CODE ELEMENT
-
-    $adapter = new DoctrineAdapter(new ORMPaginator($query, false));
-    $paginator = new Paginator($adapter);
-    $paginator->setDefaultItemCountPerPage(10000);
-    $paginator->setCurrentPageNumber($page);
+    $quotes = $this->entityManager->getRepository(Quote::class)
+              ->findBy(['user'=>$userid], ['id'=>'DESC']); //OWN CODE ELEMENT
 
     return new ViewModel([
-      'quotes' => $paginator
-      //'quotes' => $query
+      'quotes' => $quotes
     ]);
   }
 

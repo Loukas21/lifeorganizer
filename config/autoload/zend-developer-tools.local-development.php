@@ -11,7 +11,7 @@
  * It will be enabled when you enable development mode.
  */
 return [
-    'zenddevelopertools' => [
+    'laminas-developer-tools' => [
         /**
          * General Profiler settings
          */

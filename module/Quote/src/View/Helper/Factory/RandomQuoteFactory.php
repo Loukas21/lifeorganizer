@@ -2,7 +2,7 @@
 namespace Quote\View\Helper\Factory;
 
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 use Quote\Service\QuoteManager;
 use Quote\View\Helper\RandomQuote;
 

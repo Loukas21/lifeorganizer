@@ -14,7 +14,7 @@ class QuoteManager
 
   /**
    * PHP template renderer.
-   * @var Zend\View\Renderer\PhpRenderer
+   * @var Laminas\View\Renderer\PhpRenderer
    */
   private $viewRenderer;
 

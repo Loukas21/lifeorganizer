@@ -4,5 +4,12 @@
         <testsuite name="ZendSkeletonApplication Test Suite">
             <directory>./module/Application/test</directory>
         </testsuite>
+        <testsuite name="Quote Controller Test Suite">
+            <directory>./module/Quote/test</directory>
+        </testsuite>
     </testsuites>
+    <php>
+        <const name="APPLICATION_PATH" value="/var/www/html/lifeorganizer" />
+        <server name="APPLICATION_ENV" value="tests" />
+    </php>
 </phpunit>

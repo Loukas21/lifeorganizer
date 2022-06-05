@@ -1,0 +1,131 @@
+<?php
+$this->headTitle('Edycja książki');
+
+$this->mainMenu()->setActiveItemId('books');
+
+$this->pageBreadcrumbs()->setItems([
+            'Strona główna'=>$this->url('home'),
+            'Książki'=>$this->url('books'),
+            'Edycja'=>$this->url('books', ['action'=>'edit', 'id'=>$publication->getId()])
+            ]);
+
+$form->get('author')->setAttributes([
+    'class'=>'form-control',
+    'placeholder'=>'wpisz autora'
+    ]);
+
+$form->get('title')->setAttributes([
+    'class'=>'form-control',
+    'placeholder'=>'wpisz tytuł'
+    ]);
+
+$form->get('iswanted')->setAttributes([
+    ]);
+
+$form->get('type')->setAttributes([
+    'class'=>'form-control'
+    ]);
+
+$form->get('description')->setAttributes([
+    'class'=>'form-control',
+    'placeholder'=>'wpisz opis'
+    ]);
+
+$form->get('totality')->setAttributes([
+    'class'=>'form-control',
+    ]);
+
+$form->get('currentprogress')->setAttributes([
+    'class'=>'form-control',
+    ]);
+
+$form->get('isfinished')->setAttributes([
+    ]);
+
+$form->get('ishiddeninvcv')->setAttributes([
+    ]);
+
+$form->get('submit')
+        ->setAttributes(['class'=>'btn btn-primary btn-sm'])
+        ->setValue('Zapisz');
+
+$form->prepare();
+?>
+
+<h3 class="app-content-title">Edycja książki</h3>
+
+<div class="row">
+    <div class="col-md-6">
+        <?= $this->form()->openTag($form); ?>
+
+        <div class="form-group">
+            <?= $this->formElement($form->get('user')); ?>
+        </div>
+        <div class="form-group">
+            <?= $this->formElement($form->get('id')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('author')); ?>
+            <?= $this->formElement($form->get('author')); ?>
+            <?= $this->formElementErrors($form->get('author')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('title')); ?>
+            <?= $this->formElement($form->get('title')); ?>
+            <?= $this->formElementErrors($form->get('title')); ?>
+        </div>
+        </br>
+        <div class="form-check-label">
+            <?= $this->formLabel($form->get('iswanted')); ?>
+            <?= $this->formElement($form->get('iswanted')); ?>
+            <?= $this->formElementErrors($form->get('iswanted')); ?>
+        </div>
+        </br>
+        <div class="form-group">
+            <?= $this->formLabel($form->get('type')); ?>
+            <?= $this->formElement($form->get('type')); ?>
+            <?= $this->formElementErrors($form->get('type')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('description')); ?>
+            <?= $this->formElement($form->get('description')); ?>
+            <?= $this->formElementErrors($form->get('description')); ?>
+        </div>
+        </br>
+        <div class="form-check-label form-group">
+            <?= $this->formLabel($form->get('totality')); ?>
+            <?= $this->formElement($form->get('totality')); ?>
+            <?= $this->formElementErrors($form->get('totality')); ?>
+        </div>
+        <div class="form-check-label form-group">
+            <?= $this->formLabel($form->get('currentprogress')); ?>
+            <?= $this->formElement($form->get('currentprogress')); ?>
+            <?= $this->formElementErrors($form->get('currentprogress')); ?>
+        </div>
+        </br>
+        <div class="form-check-label">
+            <?= $this->formLabel($form->get('isfinished')); ?>
+            <?= $this->formElement($form->get('isfinished')); ?>
+            <?= $this->formElementErrors($form->get('isfinished'));?>
+        </div>
+        </br>
+        <div class="form-check-label">
+            <?= $this->formLabel($form->get('ishiddeninvcv')); ?>
+            <?= $this->formElement($form->get('ishiddeninvcv')); ?>
+            <?= $this->formElementErrors($form->get('ishiddeninvcv')); ?>
+        </div>
+        </br>
+        <?= $this->formElement($form->get('csrf')); ?>
+        <?= $this->formElementErrors($form->get('csrf')); ?>
+        <?= $this->formElement($form->get('submit')); ?>
+
+        <?= $this->form()->closeTag(); ?>
+    </div>
+</div>
+
+<?= $this->inlineScript()
+      //->prependFile($this->basePath('js/publications.js'))
+?>

@@ -7,6 +7,9 @@
         <testsuite name="Quote Controller Test Suite">
             <directory>./module/Quote/test</directory>
         </testsuite>
+        <testsuite name="Publication Controller Test Suite">
+            <directory>./module/Publication/test</directory>
+        </testsuite>
     </testsuites>
     <php>
         <const name="APPLICATION_PATH" value="/var/www/html/lifeorganizer" />

@@ -54,7 +54,6 @@ class QuoteManager
 
     $quote->setAuthor($data['author']);
     $quote->setQuote($data['quote']);
-    //$quote->setUser($data['user']);
 
     // Apply changes to database.
     $this->entityManager->flush();

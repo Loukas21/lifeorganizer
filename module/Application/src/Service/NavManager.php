@@ -315,7 +315,7 @@ class NavManager
                 $referencesDropdownItems[] = [
                             'id' => 'books',
                             'label' => 'Książki',
-                            'link' => $url('about')
+                            'link' => $url('books')
                         ];
             }
 

@@ -5,6 +5,8 @@ use Laminas\Stdlib\ArrayUtils;
 
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
+//Set default timezone for application
+date_default_timezone_set('Europe/Warsaw');
 /**
  * This makes our life easier when dealing with paths. Everything is relative
  * to the application root now.

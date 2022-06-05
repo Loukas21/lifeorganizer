@@ -32,5 +32,6 @@ return [
     'Laminas\DeveloperTools',
     'Application',
     'User',
-    'Quote'
+    'Quote',
+    'Publication'
 ];

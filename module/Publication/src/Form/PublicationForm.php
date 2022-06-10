@@ -152,8 +152,8 @@ class PublicationForm extends Form
           ],
           'attributes' => [
             'id' => 'totality',
-            //'min' => '1',
-            //'step' => '1',
+            'min' => '0',
+            'step' => '1',
           ],
         ]);
 
@@ -181,8 +181,8 @@ class PublicationForm extends Form
           ],
           'attributes' => [
             'id' => 'currentprogress',
-            //'min' => '0',
-            //'step' => '1',
+            'min' => '0',
+            'step' => '1',
           ],
         ]);
 
@@ -345,6 +345,16 @@ class PublicationForm extends Form
                     'filters'  => [
                     ],
                     'validators' => [
+                      [
+                          'name'    => 'GreaterThan',
+                          'options' => [
+                              'min' => 0,
+                              'inclusive' => true,
+                              'messages' => [
+                                \Laminas\Validator\GreaterThan::NOT_GREATER_INCLUSIVE => 'Całość nie może być mniejsza od %min%',
+                              ]
+                          ],
+                      ],
                     ],
                 ]);
             if ($this->scenario == 'update')
@@ -358,6 +368,16 @@ class PublicationForm extends Form
                     'filters'  => [
                     ],
                     'validators' => [
+                        [
+                            'name'    => 'GreaterThan',
+                            'options' => [
+                                'min' => 0,
+                                'inclusive' => true,
+                                'messages' => [
+                                  \Laminas\Validator\GreaterThan::NOT_GREATER_INCLUSIVE => 'Aktualny postęp nie może być mniejszy od %min%',
+                                ]
+                            ],
+                        ],
                         [
                             'name'  => CustomPublicationValidator\CallbackCurrentProgressType::class,
                             'options' => [

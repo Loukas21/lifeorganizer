@@ -133,6 +133,12 @@ class QuoteController extends AbstractActionController
         return $this->redirect()->toRoute('quotes',
                     ['action' => 'index']);
       }
+      else {
+        return new ViewModel(array(
+          'quote' => $quote,
+          'form' => $form
+        ));
+      }
     } else {
 
       $form->setData(array(

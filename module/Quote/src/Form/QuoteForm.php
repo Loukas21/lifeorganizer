@@ -62,6 +62,10 @@ class QuoteForm extends Form
             'options' => [
                 'label' => 'Autor',
             ],
+            'attributes' => [
+              'id' => 'author',
+              'maxlength' => 150,
+            ],
         ]);
 
         // Add "quote" field
@@ -74,6 +78,7 @@ class QuoteForm extends Form
             'attributes' => [
                 'id' => 'quote',
                 'rows' => '6',
+                'maxlength' => 1000,
             ],
         ]);
 
@@ -124,7 +129,10 @@ class QuoteForm extends Form
                         'name'    => 'StringLength',
                         'options' => [
                             'min' => 0,
-                            'max' => 150
+                            'max' => 150,
+                            'messages' => [
+                              \Laminas\Validator\StringLength::TOO_LONG => 'Autor nie może mieć więcej niż %max% znaków'
+                            ],
                         ],
                     ],
                 ],
@@ -141,8 +149,18 @@ class QuoteForm extends Form
                     [
                         'name'    => 'StringLength',
                         'options' => [
-                            'min' => 1,
-                            'max' => 1000
+                            'max' => 1000,
+                            'messages' => [
+                              \Laminas\Validator\StringLength::TOO_LONG => 'Cytat nie może mieć więcej niż %max% znaków'
+                            ],
+                        ],
+                    ],
+                    [
+                        'name'    => 'NotEmpty',
+                        'options' => [
+                            'messages' => [
+                              \Laminas\Validator\NotEmpty::IS_EMPTY => 'Cytat nie może być pusty'
+                            ],
                         ],
                     ],
                 ],

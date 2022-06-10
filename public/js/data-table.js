@@ -1,5 +1,9 @@
 $(document).ready(function() {
     $('.app-data-table').DataTable({
+      columnDefs: [
+        { orderable: false, targets: 'nosort' },
+        { searchable: false, targets: 'noorder' }
+      ],
       "language": {
         "paginate": {
           "previous": "Poprzednia",
@@ -11,6 +15,6 @@ $(document).ready(function() {
         "infoEmpty": "Wyświetlane rekordy 0-0 / 0",
         "infoFiltered": "(wyfiltrowane z _MAX_)",
         "zeroRecords": "Nie znaleziono rekordów"
-    }
+        }
   });
 } );

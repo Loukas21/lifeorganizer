@@ -113,6 +113,16 @@ class PublicationManager
         // set 'current progress date'
         $publication->setCurrentProgressDate(date("Y-m-d H:i:s"));
     }
+    // if last value in 'current progress' field is NOT less than current value
+    else {
+      if ($publication->getCurrentProgress() > $data['currentprogress']) {
+          // set 'current progress date'
+          $publication->setCurrentProgressDate(date("Y-m-d H:i:s"));
+      }
+      // set 'current progress'
+      $publication->setCurrentProgress($data['currentprogress']);
+
+    }
     // set 'totality'
     $publication->setTotality($data['totality']);
     // set 'is finished'

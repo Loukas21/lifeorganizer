@@ -85,6 +85,9 @@ class QuoteForm extends Form
         $this->add([
           'type' => 'hidden',
           'name' => 'user',
+          'attributes' => [
+              'id' => 'user',
+          ],
         ]);
 
 

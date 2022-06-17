@@ -4,10 +4,13 @@
         <testsuite name="ZendSkeletonApplication Test Suite">
             <directory>./module/Application/test</directory>
         </testsuite>
-        <testsuite name="Quote Controller Test Suite">
+        <testsuite name="User Test Suite">
+            <directory>./module/User/test</directory>
+        </testsuite>
+        <testsuite name="Quote Test Suite">
             <directory>./module/Quote/test</directory>
         </testsuite>
-        <testsuite name="Publication Controller Test Suite">
+        <testsuite name="Publication Test Suite">
             <directory>./module/Publication/test</directory>
         </testsuite>
     </testsuites>

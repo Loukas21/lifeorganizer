@@ -55,6 +55,7 @@ class PublicationForm extends Form
     /**
      * This method adds elements to form (input fields and submit button).
      */
+
     protected function addElements()
     {
         // Add "author" field
@@ -251,6 +252,7 @@ class PublicationForm extends Form
                     ],
                 ],
             ]);
+
 
         // Add input for "title" field
         $inputFilter->add([

@@ -2,6 +2,7 @@
   namespace QuoteTest\Model;
 
   use Quote\Entity\Quote;
+  use Quote\Form\QuoteForm;
   use PHPUnit\Framework\TestCase;
 
   class QuoteTest extends testCase
@@ -14,80 +15,103 @@
       $this->assertNull($quote->getAuthor(), '"author" should be null by default');
       $this->assertNull($quote->getQuote(), '"quote" should be null by default');
     }
-    /*
-    public function testExchangeArraySetsPropertiesCorrectly()
+
+    public function testInputFiltersAreSetCorrectly()
     {
+      $scenario = 'update';
+      $quoteform = new QuoteForm($scenario);
+
+      $inputFilter = $quoteform->getInputFilter();
+
+      //$this->assertSame(5, $inputFilter->count());
+      $this->assertTrue($inputFilter->has('author'));
+      $this->assertTrue($inputFilter->has('quote'));
+      $this->assertTrue($inputFilter->has('user'));
+
+    }
+
+    /**
+     * @dataProvider getInvalidQuoteData
+     * @group inputFilters
+     */
+     /*
+    public function testInputFiltersIncorrect($row)
+    {
+      $scenario = 'update';
       $quote = new Quote();
+      $quoteform = new QuoteForm($scenario);
+
+      $quoteform->setInputFilter($quoteform->getInputFilter());
+      $quoteform->setHydrator(new \Laminas\Hydrator\ObjectPropertyHydrator());
+      $quoteform->bind($quote);
+      $quoteform->setData($row);
+
+      $this->assertFalse($quoteform->isValid());
+      $this->assertTrue(count($quoteform->getMessages()) > 0);
+    }
+    */
+
+    /**
+     * @group inputFilters
+     */
+
+     /*
+    public function testInputFiltersSuccess()
+    {
+      $scenario = 'update';
+      $quote = new Quote();
+
       $data = [
-        'artist' => 'some artist',
-        'id' => 123,
-        'title' => 'some title'
+        'user'    => 3,
+        'author'   => 'test',
+        'quote' => 'test',
       ];
 
-      $album->exchangeArray($data);
+      $quoteform = new QuoteForm($scenario);
 
-      $this->assertSame(
-        $data['id'],
-        $quote->getId(),
-        '"id" was not set correctly'
-      );
+      $quoteform->setInputFilter($quoteform->getInputFilter());
+      $quoteform->setHydrator(new \Laminas\Hydrator\ObjectPropertyHydrator());
+      $quoteform->bind($quote);
 
-      $this->assertSame(
-        $data['author'],
-        $quote->getAuthor(),
-        '"artist" was not set correctly'
-      );
+      $quoteform->setData($data);
 
-      $this->assertSame(
-        $data['quote'],
-        $quote->getQuote(),
-        '"title" was not set correctly'
-      );
+      //$quoteform->setData($this->getQuoteData());
+      //$quoteform->setData($row);
+
+      $this->assertTrue($quoteform->isValid());
+      $this->assertCount(0, $quoteform->getMessages());
     }
 
-    public function testExchangeArraySetsPropertiesToNullIfKeysAreNotPresent()
+    public function getInvalidQuoteData()
     {
-      $album = new Album();
-
-      $album->exchangeArray([
-        'artist' => 'some artist',
-        'id' => 123,
-        'title' => 'some title'
-      ]);
-      $album->exchangeArray([]);
-
-      $this->assertNull($album->artist, '"artist" should default to null');
-      $this->assertNull($album->id, '"id" should default to null');
-      $this->assertNull($album->title, '"title" should default to null');
-    }
-
-    public function testGetArrayCopyReturnsAnArrayWithPropertyValues()
-    {
-      $album = new Album();
-      $data = [
-        'artist' => 'some artist',
-        'id' => 123,
-        'title' => 'some title'
+      return [
+        [
+          [
+            'user' => null,
+            'author' => null,
+            'quote' => null,
+          ],
+          [
+            'user' => 0,
+            'author' => 123,
+            'quote' => null,
+          ]
+        ]
       ];
-
-      $album->exchangeArray($data);
-      $copyArray = $album->getArrayCopy();
-
-      $this->assertSame($data['artist'], $copyArray['artist'], '"artist" was not set correctly');
-      $this->assertSame($data['id'], $copyArray['id'], '"id" was not set correctly');
-      $this->assertSame($data['title'], $copyArray['title'], '"title" was not set correctly');
     }
 
-    public function testInputFilterAreSetCorrectly()
+    public function getQuoteData()
     {
-      $album = new Album();
+      return [
+        [
+          [
+              'user' => 3,
+              'author' => 'test',
+              'quote' => 'testewdssdwqasrfwerwqed'
+          ],
+        ]
 
-      $inputFilter = $album->getInputFilter();
-
-      $this->assertSame(3, $inputFilter->count());
-      $this->assertTrue($inputFilter->has('artist'));
-      $this->assertTrue($inputFilter->has('id'));
-      $this->assertTrue($inputFilter->has('title'));
+      ];
     }
     */
   }

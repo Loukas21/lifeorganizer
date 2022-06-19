@@ -1,0 +1,90 @@
+<?php
+$this->headTitle('Dodawanie języka');
+
+$this->mainMenu()->setActiveItemId('languages');
+
+$this->pageBreadcrumbs()->setItems([
+            'Strona główna'=>$this->url('home'),
+            'Języki'=>$this->url('languages'),
+            'Dodawanie'=>$this->url('languages', ['action'=>'add'])
+            ]);
+
+$form->get('language')->setAttributes([
+    'class'=>'form-control',
+    ]);
+
+$form->get('yearsofstudy')->setAttributes([
+    'class'=>'form-control',
+    ]);
+
+$form->get('level')->setAttributes([
+    'class'=>'form-control',
+    ]);
+
+$form->get('certificatedescription')->setAttributes([
+    'class'=>'form-control',
+    'placeholder'=>'opisz szczegóły certyfikatu'
+    ]);
+
+$form->get('certificatedate')->setAttributes([
+    'class'=>'form-control',
+    ]);
+
+$form->get('submit')->setAttributes(['class'=>'btn btn-primary btn-sm']);
+
+$form->prepare();
+?>
+
+<h3 class="app-content-title">Dodawanie języka</h3>
+
+<div class="row">
+    <div class="col-md-6">
+        <?= $this->form()->openTag($form); ?>
+
+        <div class="form-group">
+            <?= $this->formElement($form->get('user')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('language')); ?>
+            <?= $this->formElement($form->get('language')); ?>
+            <?= $this->formElementErrors($form->get('language')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('yearsofstudy')); ?>
+            <?= $this->formElement($form->get('yearsofstudy')); ?>
+            <?= $this->formElementErrors($form->get('yearsofstudy')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('level')); ?>
+            <?= $this->formElement($form->get('level')); ?>
+            <?= $this->formElementErrors($form->get('level')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('hascertificate')); ?>
+            <?= $this->formElement($form->get('hascertificate')); ?>
+            <?= $this->formElementErrors($form->get('hascertificate')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('certificatedescription')); ?>
+            <?= $this->formElement($form->get('certificatedescription')); ?>
+            <?= $this->formElementErrors($form->get('certificatedescription')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('certificatedate')); ?>
+            <?= $this->formElement($form->get('certificatedate')); ?>
+            <?= $this->formElementErrors($form->get('certificatedate')); ?>
+        </div>
+
+        <?= $this->formElement($form->get('csrf')); ?>
+        <?= $this->formElementErrors($form->get('csrf')); ?>
+        <?= $this->formElement($form->get('submit')); ?>
+
+        <?= $this->form()->closeTag(); ?>
+    </div>
+</div>

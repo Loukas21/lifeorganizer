@@ -13,6 +13,9 @@
         <testsuite name="Publication Test Suite">
             <directory>./module/Publication/test</directory>
         </testsuite>
+        <testsuite name="Language Test Suite">
+            <directory>./module/Language/test</directory>
+        </testsuite>
     </testsuites>
     <php>
         <const name="APPLICATION_PATH" value="/var/www/html/lifeorganizer" />

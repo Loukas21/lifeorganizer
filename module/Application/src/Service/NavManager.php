@@ -273,7 +273,7 @@ class NavManager
                 $experienceDropdownItems[] = [
                             'id' => 'languages',
                             'label' => 'Języki',
-                            'link' => $url('about')
+                            'link' => $url('languages')
                         ];
             }
 

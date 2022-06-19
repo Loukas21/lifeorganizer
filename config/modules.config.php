@@ -33,5 +33,6 @@ return [
     'Application',
     'User',
     'Quote',
-    'Publication'
+    'Publication',
+    'Language'
 ];

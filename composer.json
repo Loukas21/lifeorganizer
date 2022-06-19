@@ -47,7 +47,8 @@
             "Application\\": "module/Application/src/",
             "User\\": "module/User/src/",
             "Quote\\": "module/Quote/src/",
-            "Publication\\": "module/Publication/src/"
+            "Publication\\": "module/Publication/src/",
+            "Language\\": "module/Language/src/"
         }
     },
     "autoload-dev": {
@@ -55,7 +56,8 @@
             "ApplicationTest\\": "module/Application/test/",
             "UserTest\\": "module/User/test/",
             "QuoteTest\\": "module/Quote/test/",
-            "PublicationTest\\": "module/Publication/test/"
+            "PublicationTest\\": "module/Publication/test/",
+            "LanguageTest\\": "module/Language/test/"
         }
     },
     "extra": [],

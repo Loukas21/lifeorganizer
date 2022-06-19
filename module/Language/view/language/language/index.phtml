@@ -1,0 +1,68 @@
+<?php
+$this->headTitle('Zarządzanie językami');
+
+$this->mainMenu()->setActiveItemId('languages');
+
+$this->pageBreadcrumbs()->setItems([
+            'Strona główna'=>$this->url('home'),
+            'Języki'=>$this->url('languages'),
+            ]);
+?>
+
+<h3 class="app-content-title">Zarządzanie językami</h3>
+
+<?= $this->flashMessenger()->render('error', ['alert', 'alert-warning']); ?>
+<?= $this->flashMessenger()->render('success', ['alert', 'alert-success']); ?>
+<?= $this->flashMessenger()->render('info', ['alert', 'alert-info']); ?>
+
+<p>
+<a class="btn btn-secondary btn-sm" href="
+    <?= $this->url('languages', ['action'=>'add']); ?>">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Dodaj język
+</a>
+</p>
+
+<table class="table table-striped small table-responsive app-data-table">
+
+   <thead>
+        <!--<th>ID</th>-->
+        <th>Język</th>
+        <th>Lata nauki</th>
+        <th>Poziom</th>
+        <th>Certyfikat</th>
+        <th class='nosort noorder'>Akcje</th>
+    </thead>
+    <tbody>
+    <?php foreach ($languages as $language): ?>
+
+    <tr>
+        <td>
+          <img class="countryflag" src="<?= $this->basePath() . '/img/country-flags/flag-icons-main/flags/4x3/' . $language->getLanguageCountryFlagAsString() ?>"/>
+          <?= $this->escapeHtml($language->getLanguageAsString()); ?>
+        </td>
+        <td>
+            <?= $this->escapeHtml($language->getYearsOfStudy()); ?></a>
+        </td>
+        <td>
+            <?= $this->escapeHtml($language->getLanguageLevelAsString()); ?></a>
+        </td>
+        <td>
+            <?= $this->escapeHtml($language->getHasCertificate()); ?></a>
+        </td>
+        <td>
+            <nobr>
+            <a class="btn btn-secondary btn-sm" href="<?= $this->url('languages',
+                    ['action'=>'edit', 'id'=>$language->getId()]); ?>">
+                <span class="glyphicon glyphicon-pencil" ></span> Edytuj
+            </a>
+            <a class="btn btn-secondary btn-sm" href="<?= $this->url('languages',
+                    ['action'=>'delete', 'id'=>$language->getId()]); ?>" onclick="return confirm ('Czy na pewno chcesz usunąć ten rekord?')">
+                <span class="glyphicon glyphicon-remove"></span> Usuń
+            </a>
+          </nobr>
+        </td>
+    </tr>
+
+    <?php endforeach; ?>
+</tbody>
+</table>

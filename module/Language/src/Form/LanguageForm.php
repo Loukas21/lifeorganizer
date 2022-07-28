@@ -85,6 +85,7 @@ class LanguageForm extends Form
                 'id' => 'yearsofstudy',
                 'min' => '0',
                 'step' => '0.1',
+                'max' => '150',
             ],
         ]);
 
@@ -95,13 +96,14 @@ class LanguageForm extends Form
             'options' => [
                 'label' => 'Poziom',
                 'value_options' => [
-                    '0' => '--wybierz--',
+                    '0' => '--nieokreślony--',
                     '1' => 'A1',
                     '2' => 'A2',
                     '3' => 'B1',
                     '4' => 'B2',
                     '5' => 'C1',
                     '6' => 'C2',
+                    '7' => 'język ojczysty'
                 ],
             ],
             'attributes' => [
@@ -131,6 +133,7 @@ class LanguageForm extends Form
             'attributes' => [
               'id' => 'certificatedescription',
               'rows' => '2',
+              'maxlength' => 200,
             ],
         ]);
 
@@ -184,6 +187,26 @@ class LanguageForm extends Form
         // Create main input filter
         $inputFilter = $this->getInputFilter();
 
+
+        // Add input for "certificatedescription" field
+        $inputFilter->add([
+                'name'     => 'language',
+                'required' => true,
+                'filters'  => [
+                ],
+                'validators' => [
+                    [
+                        'name'    => 'GreaterThan',
+                        'options' => [
+                          'min' => 0,
+                            'messages' => [
+                              \Laminas\Validator\GreaterThan::NOT_GREATER => 'Wybierz język'
+                            ],
+                        ],
+                    ],
+                ],
+            ]);
+
         // Add input for "yearsofstudy" field
         $inputFilter->add([
                 'name'     => 'yearsofstudy',
@@ -192,11 +215,20 @@ class LanguageForm extends Form
                 ],
                 'validators' => [
                     [
+                        'name'    => 'NotEmpty',
+                        'options' => [
+                            'messages' => [
+                              \Laminas\Validator\NotEmpty::IS_EMPTY => 'Liczba lat nauki nie może być pusta'
+                            ],
+                        ],
+                    ],
+                    [
                         'name'    => 'LessThan',
                         'options' => [
                             'max' => 150,
+                            'inclusive' => true,
                             'messages' => [
-                              \Laminas\Validator\LessThan::NOT_LESS => 'Liczba lat nauki nie może być większa niż %max%'
+                              \Laminas\Validator\LessThan::NOT_LESS_INCLUSIVE => 'Liczba lat nauki nie może być większa niż %max%'
                             ],
                         ],
                     ],
@@ -211,6 +243,8 @@ class LanguageForm extends Form
                     ],
                 ],
             ]);
+
+
 
         // Add input for "certificatedescription" field
         $inputFilter->add([

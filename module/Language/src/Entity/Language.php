@@ -17,12 +17,14 @@ class Language
   const LANGUAGE_GERMAN     = 3; // german.
   const LANGUAGE_RUSSIAN    = 4; // russian.
 
+  const LEVEL_UNDETERMINED  = 0;
   const LEVEL_A1            = 1;
   const LEVEL_A2            = 2;
   const LEVEL_B1            = 3;
   const LEVEL_B2            = 4;
   const LEVEL_C1            = 5;
   const LEVEL_C2            = 6;
+  const LEVEL_NATIVE        = 7;
 
 
     /**
@@ -43,6 +45,11 @@ class Language
     protected $yearsOfStudy;
 
     /**
+     * @ORM\Column(name="level")
+     */
+    protected $level;
+
+    /**
      * @ORM\Column(name="has_certificate")
      */
     protected $hasCertificate;
@@ -56,11 +63,6 @@ class Language
      * @ORM\Column(name="certificate_date")
      */
     protected $certificateDate;
-
-    /**
-     * @ORM\Column(name="level")
-     */
-    protected $level;
 
     /**
      * @ORM\Column(name="user_id")
@@ -254,12 +256,14 @@ class Language
     public static function getLevelList()
     {
         return [
+            self::LEVEL_UNDETERMINED => '--nieokreślony--',
             self::LEVEL_A1 => 'początkujący (A1)',
             self::LEVEL_A2 => 'podstawowy (A2)',
             self::LEVEL_B1 => 'średnio zaawansowany (B1)',
             self::LEVEL_B2 => 'wyższy średnio zaawansowany (B2)',
             self::LEVEL_C1 => 'zaawansowany (C1)',
             self::LEVEL_C2 => 'zaawansowany biegły (C2)',
+            self::LEVEL_NATIVE => 'język ojczysty',
         ];
     }
 
@@ -291,6 +295,19 @@ class Language
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Returns certificate icon as string.
+     * @return string
+     */
+    public function getLanguageCertificateIconAsString()
+    {
+        $certificateString = "";
+        if ($this->hasCertificate == true) {
+          $certificateString .= '<i class="fas fa-graduation-cap" title="'.$this->getCertificateDescription().'"></i>';
+        }
+        return $certificateString;
     }
 
     /**

@@ -29,8 +29,10 @@
       $inputFilter = $languageform->getInputFilter();
 
       //$this->assertSame(5, $inputFilter->count());
+      $this->assertTrue($inputFilter->has('language'));
       $this->assertTrue($inputFilter->has('yearsofstudy'));
       $this->assertTrue($inputFilter->has('certificatedescription'));
+      $this->assertTrue($inputFilter->has('certificatedate'));
       //$this->assertTrue($inputFilter->has('user'));
 
     }

@@ -16,6 +16,9 @@
         <testsuite name="Language Test Suite">
             <directory>./module/Language/test</directory>
         </testsuite>
+        <testsuite name="BloodDonation Test Suite">
+            <directory>./module/BloodDonation/test</directory>
+        </testsuite>
     </testsuites>
     <php>
         <const name="APPLICATION_PATH" value="/var/www/html/lifeorganizer" />

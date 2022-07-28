@@ -1,0 +1,71 @@
+<?php
+$this->headTitle('Zarządzanie krwiodawstwem');
+
+$this->mainMenu()->setActiveItemId('blooddonation');
+
+$this->pageBreadcrumbs()->setItems([
+            'Strona główna'=>$this->url('home'),
+            'Krwiodawstwo'=>$this->url('blooddonation'),
+            ]);
+?>
+
+<h3 class="app-content-title">Zarządzanie krwiodawstwem</h3>
+
+<?= $this->flashMessenger()->render('error', ['alert', 'alert-warning']); ?>
+<?= $this->flashMessenger()->render('success', ['alert', 'alert-success']); ?>
+<?= $this->flashMessenger()->render('info', ['alert', 'alert-info']); ?>
+
+<p>
+<a class="btn btn-secondary btn-sm" href="
+    <?= $this->url('blooddonation', ['action'=>'add']); ?>">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Dodaj donację
+</a>
+</p>
+
+<table id="blood-donation-table" class="table table-striped small table-responsive blood-donation-table">
+
+   <thead>
+        <!--<th>ID</th>-->
+        <th>Data</th>
+        <th>Miejsce</th>
+        <th>Status</th>
+        <th>Karencja do</th>
+        <th>Ilość (ml)</th>
+        <th class='nosort noorder'>Akcje</th>
+    </thead>
+    <tbody>
+    <?php foreach ($bloodDonations as $bloodDonation): ?>
+
+    <tr>
+        <td>
+            <?=substr($this->escapeHtml($bloodDonation->getEventDate()),0,10);?>
+        </td>
+        <td>
+            <?=$this->escapeHtml($bloodDonation->getPlace()); ?>
+        </td>
+        <td>
+            <?php echo $bloodDonation->getDonationInfoIcons(); ?>
+        </td>
+        <td>
+            <?=$this->escapeHtml($bloodDonation->getBanDateTo()); ?>
+        </td>
+        <td>
+            <?=$this->escapeHtml($bloodDonation->getDonatedBloodAmount()); ?>
+        </td>
+        <td>
+            <nobr>
+            <a class="btn btn-secondary btn-sm" href="<?= $this->url('blooddonation',
+                    ['action'=>'edit', 'id'=>$bloodDonation->getId()]); ?>">
+                <span class="glyphicon glyphicon-pencil" ></span> Edytuj
+            </a>
+            <a class="btn btn-secondary btn-sm" href="<?= $this->url('blooddonation',
+                    ['action'=>'delete', 'id'=>$bloodDonation->getId()]); ?>" onclick="return confirm ('Czy na pewno chcesz usunąć ten rekord?')">
+                <span class="glyphicon glyphicon-remove"></span> Usuń
+            </a>
+          </nobr>
+        </td>
+    </tr>
+
+    <?php endforeach; ?>
+</tbody>
+</table>

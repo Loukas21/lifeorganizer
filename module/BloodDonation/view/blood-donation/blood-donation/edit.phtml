@@ -1,0 +1,121 @@
+<?php
+$this->headTitle('Edycja donacji');
+
+$this->mainMenu()->setActiveItemId('blooddonation');
+
+$this->pageBreadcrumbs()->setItems([
+            'Strona główna'=>$this->url('home'),
+            'Krwiodawstwo'=>$this->url('blooddonation'),
+            'Edycja'=>$this->url('blooddonation', ['action'=>'edit', 'id'=>$bloodDonation->getId()])
+            ]);
+
+$form->get('place')->setAttributes([
+    'class'=>'form-control',
+    'placeholder'=>'wpisz nazwę punktu krwiodawstwa'
+    ]);
+
+$form->get('donationdate')->setAttributes([
+    'class'=>'form-control'
+    ]);
+/*
+$form->get('relatedeventholiday')->setAttributes([
+    'class'=>'form-control'
+    ]);
+
+$form->get('relatedeventmedicalexamination')->setAttributes([
+    'class'=>'form-control'
+    ]);
+*/
+$form->get('bancausetype')->setAttributes([
+    'class'=>'form-control'
+    ]);
+
+$form->get('bancausedescription')->setAttributes([
+    'class'=>'form-control',
+    'placeholder'=>'opisz powód dyskwalifikacji'
+    ]);
+
+$form->get('bandateto')->setAttributes([
+    'class'=>'form-control'
+    ]);
+
+$form->get('donatedbloodamount')->setAttributes([
+    'class'=>'form-control'
+    ]);
+
+$form->get('submit')
+        ->setAttributes(['class'=>'btn btn-primary btn-sm'])
+        ->setValue('Zapisz');
+
+$form->prepare();
+?>
+
+<h3 class="app-content-title">Edycja donacji</h3>
+
+<div class="row">
+    <div class="col-md-6">
+        <?= $this->form()->openTag($form); ?>
+
+        <div class="form-group">
+            <?= $this->formElement($form->get('user')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('place')); ?>
+            <?= $this->formElement($form->get('place')); ?>
+            <?= $this->formElementErrors($form->get('place')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('donationdate')); ?>
+            <?= $this->formElement($form->get('donationdate')); ?>
+            <?= $this->formElementErrors($form->get('donationdate')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('isplanned')); ?>
+            <?= $this->formElement($form->get('isplanned')); ?>
+            <?= $this->formElementErrors($form->get('isplanned')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('donatedbloodamount')); ?>
+            <?= $this->formElement($form->get('donatedbloodamount')); ?>
+            <?= $this->formElementErrors($form->get('donatedbloodamount')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('isdonationbanned')); ?>
+            <?= $this->formElement($form->get('isdonationbanned')); ?>
+            <?= $this->formElementErrors($form->get('isdonationbanned')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('bancausetype')); ?>
+            <?= $this->formElement($form->get('bancausetype')); ?>
+            <?= $this->formElementErrors($form->get('bancausetype')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('bancausedescription')); ?>
+            <?= $this->formElement($form->get('bancausedescription')); ?>
+            <?= $this->formElementErrors($form->get('bancausedescription')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('bandateto')); ?>
+            <?= $this->formElement($form->get('bandateto')); ?>
+            <?= $this->formElementErrors($form->get('bandateto')); ?>
+        </div>
+
+        <?= $this->formElement($form->get('csrf')); ?>
+        <?= $this->formElementErrors($form->get('csrf')); ?>
+        <?= $this->formElement($form->get('submit')); ?>
+
+        <?= $this->form()->closeTag(); ?>
+    </div>
+</div>
+
+<?= $this->inlineScript()
+      ->prependFile($this->basePath('js/blooddonation.js'))
+?>

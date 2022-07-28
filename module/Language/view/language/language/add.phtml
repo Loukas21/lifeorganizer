@@ -23,11 +23,13 @@ $form->get('level')->setAttributes([
 
 $form->get('certificatedescription')->setAttributes([
     'class'=>'form-control',
-    'placeholder'=>'opisz szczegóły certyfikatu'
+    'placeholder'=>'opisz szczegóły certyfikatu',
+    'id' => 'certificatedescriptionarea'
     ]);
 
 $form->get('certificatedate')->setAttributes([
     'class'=>'form-control',
+    'id' => 'certificatedatearea'
     ]);
 
 $form->get('submit')->setAttributes(['class'=>'btn btn-primary btn-sm']);
@@ -88,3 +90,7 @@ $form->prepare();
         <?= $this->form()->closeTag(); ?>
     </div>
 </div>
+
+<?= $this->inlineScript()
+      ->prependFile($this->basePath('js/languages.js'))
+?>

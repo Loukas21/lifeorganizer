@@ -34,5 +34,6 @@ return [
     'User',
     'Quote',
     'Publication',
-    'Language'
+    'Language',
+    'BloodDonation'
 ];

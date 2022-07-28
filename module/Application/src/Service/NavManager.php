@@ -173,7 +173,7 @@ class NavManager
                 $healthDropdownItems[] = [
                             'id' => 'blooddonation',
                             'label' => 'Krwiodawstwo',
-                            'link' => $url('about')
+                            'link' => $url('blooddonation')
                         ];
             }
 

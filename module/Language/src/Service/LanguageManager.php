@@ -37,16 +37,29 @@ class LanguageManager
     // Create new Language entity.
     $language = new Language();
     $language->setLanguage($data['language']);
-    $language->setYearsOfStudy($data['yearsofstudy']);
+
+    if ($data['yearsofstudy'] == '') {
+        $language->setYearsOfStudy(0);
+    }
+    else {
+        $language->setYearsOfStudy($data['yearsofstudy']);
+    }
     $language->setLevel($data['level']);
     $language->setHasCertificate($data['hascertificate']);
-    $language->setCertificateDescription($data['certificatedescription']);
-    if ($data['certificatedate'] == '') {
+    if ($data['hascertificate'] != "1") {
+          $language->setCertificateDescription(null);
           $language->setCertificateDate(null);
     }
     else {
-        $language->setCertificateDate($data['certificatedate']);
+        $language->setCertificateDescription($data['certificatedescription']);
+        if ($data['certificatedate'] == '') {
+              $language->setCertificateDate(null);
+        }
+        else {
+            $language->setCertificateDate($data['certificatedate']);
+        }
     }
+
     $language->setUser($data['user']);
 
     // Add the entity to the entity manager.
@@ -65,12 +78,18 @@ class LanguageManager
     $language->setYearsOfStudy($data['yearsofstudy']);
     $language->setLevel($data['level']);
     $language->setHasCertificate($data['hascertificate']);
-    $language->setCertificateDescription($data['certificatedescription']);
-    if ($data['certificatedate'] == '') {
+    if ($data['hascertificate'] != "1") {
+          $language->setCertificateDescription(null);
           $language->setCertificateDate(null);
     }
     else {
-        $language->setCertificateDate($data['certificatedate']);
+        $language->setCertificateDescription($data['certificatedescription']);
+        if ($data['certificatedate'] == '') {
+              $language->setCertificateDate(null);
+        }
+        else {
+            $language->setCertificateDate($data['certificatedate']);
+        }
     }
 
     // Apply changes to database.

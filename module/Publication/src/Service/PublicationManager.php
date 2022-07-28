@@ -47,7 +47,7 @@ class PublicationManager
     $publication->setIsHiddenInVcv($data['ishiddeninvcv']);
     // IsWanted field
     $publication->setIsWanted($data['iswanted']);
-    $publication->setTotality($data['totality']);
+    $publication->setTotality(abs($data['totality']));
     $publication->setCurrentProgress(0);
     // Fields hidden when IsWanted field is checked
     if ($data['totality'] == null) {
@@ -109,7 +109,7 @@ class PublicationManager
           $publication->setLastProgress($publication->getCurrentProgress());
         }
         // set 'current progress'
-        $publication->setCurrentProgress($data['currentprogress']);
+        $publication->setCurrentProgress(abs($data['currentprogress']));
         // set 'current progress date'
         $publication->setCurrentProgressDate(date("Y-m-d H:i:s"));
     }
@@ -120,11 +120,11 @@ class PublicationManager
           $publication->setCurrentProgressDate(date("Y-m-d H:i:s"));
       }
       // set 'current progress'
-      $publication->setCurrentProgress($data['currentprogress']);
+      $publication->setCurrentProgress(abs($data['currentprogress']));
 
     }
     // set 'totality'
-    $publication->setTotality($data['totality']);
+    $publication->setTotality(abs($data['totality']));
     // set 'is finished'
     $publication->setIsFinished($data['isfinished']);
 

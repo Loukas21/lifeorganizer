@@ -78,7 +78,8 @@ class PublicationForm extends Form
                 'label' => 'Tytuł',
             ],
             'attributes' => [
-                'id' => 'title'
+                'id' => 'title',
+                'maxlength' => 500,
             ],
         ]);
 
@@ -104,6 +105,7 @@ class PublicationForm extends Form
             'attributes' => [
               'id' => 'description',
               'rows' => '6',
+              'maxlength' => 5000,
             ],
         ]);
 
@@ -153,7 +155,8 @@ class PublicationForm extends Form
           ],
           'attributes' => [
             'id' => 'totality',
-            'min' => '0',
+            'min' => '+0',
+            'max' => '99999',
             'step' => '1',
           ],
         ]);
@@ -182,7 +185,8 @@ class PublicationForm extends Form
           ],
           'attributes' => [
             'id' => 'currentprogress',
-            'min' => '0',
+            'min' => '+0',
+            'max' => '99999',
             'step' => '1',
           ],
         ]);
@@ -357,6 +361,25 @@ class PublicationForm extends Form
                               ]
                           ],
                       ],
+                      [
+                          'name'    => 'LessThan',
+                          'options' => [
+                              'max' => 99999,
+                              'inclusive' => true,
+                              'messages' => [
+                                \Laminas\Validator\LessThan::NOT_LESS_INCLUSIVE => 'Całość nie może być większa od %max%',
+                              ]
+                          ],
+                      ],
+                      [
+                          'name'    => 'Regex',
+                          'options' => [
+                              'messages' => [
+                                \Laminas\Validator\Regex::NOT_MATCH => 'Wartość w polu Całość może zawierać tylko liczby',
+                              ],
+                              'pattern' => '(^-?\d*(\.\d+)?$)',
+                          ],
+                      ],
                     ],
                 ]);
             if ($this->scenario == 'update')
@@ -418,6 +441,15 @@ class PublicationForm extends Form
                                 return $isValid;
                               }
                             ]
+                        ],
+                        [
+                            'name'    => 'Regex',
+                            'options' => [
+                                'messages' => [
+                                  \Laminas\Validator\Regex::NOT_MATCH => 'Wartość w polu Aktualny postęp może zawierać tylko liczby',
+                                ],
+                                'pattern' => '(^-?\d*(\.\d+)?$)',
+                            ],
                         ],
                     ],
                 ]);

@@ -41,13 +41,13 @@ $this->pageBreadcrumbs()->setItems([
           <?= $this->escapeHtml($language->getLanguageAsString()); ?>
         </td>
         <td>
-            <?= $this->escapeHtml($language->getYearsOfStudy()); ?></a>
+            <?= $this->escapeHtml($language->getYearsOfStudy()); ?>
         </td>
         <td>
-            <?= $this->escapeHtml($language->getLanguageLevelAsString()); ?></a>
+            <?= $this->escapeHtml($language->getLanguageLevelAsString()); ?>
         </td>
         <td>
-            <?= $this->escapeHtml($language->getHasCertificate()); ?></a>
+            <?php echo $language->getLanguageCertificateIconAsString(); ?>
         </td>
         <td>
             <nobr>

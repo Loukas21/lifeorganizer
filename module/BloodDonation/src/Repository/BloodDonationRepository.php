@@ -26,7 +26,6 @@ class BloodDonationRepository extends EntityRepository
             ->setParameter('userid', $userid)
             ->orderBy('u.id', 'DESC');
 
-
         return $queryBuilder->getQuery();
     }
 

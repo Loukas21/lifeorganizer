@@ -9,12 +9,104 @@ $this->pageBreadcrumbs()->setItems([
             ]);
 ?>
 
-<h3 class="app-content-title">Zarządzanie krwiodawstwem</h3>
+<h3 class="app-content-title">Krwiodawstwo</h3>
 
 <?= $this->flashMessenger()->render('error', ['alert', 'alert-warning']); ?>
 <?= $this->flashMessenger()->render('success', ['alert', 'alert-success']); ?>
 <?= $this->flashMessenger()->render('info', ['alert', 'alert-info']); ?>
 
+<div class="bookmarks-bar">
+  <ul class="nav nav-pills">
+  <li class="nav-item">
+    <button id='blood-donation-dashboard-btn' class="btn btn-secondary" aria-current="page" href="#">Podsumowanie</button>
+  </li>
+  <li class="nav-item">
+      <button id='blood-donation-list-btn' class="btn btn-light" href="#" tabindex="-1" aria-disabled="true">Lista donacji</button>
+  </li>
+</ul>
+</div>
+<div id="blood-donation-dashboard">
+<h4 class="app-content-subtitle">Podsumowanie</h4>
+<div class="row">
+<div class="col-xl-4 col-lg-6 px-3 blood-donation-stats-section">
+  <h6 class="stats-subtitle">
+    Statystyki
+  </h6>
+  <table id="blood-donation-stats-tab" class="table table-striped small table-responsive">
+      <tr>
+        <th>Oddana krew</th>
+        <td>
+            <?= $this->escapeHtml($bloodDonationStats['bloodSum']); ?> ml
+        </td>
+      </tr>
+      <tr>
+        <th>Data ostatniej donacji</th>
+        <td>
+          <?= substr($this->escapeHtml($bloodDonationStats['lastBloodDonationDate']),0,10); ?>
+        </td>
+      </tr>
+      <tr>
+        <th>Data pierwszej donacji</th>
+        <td>
+          <?= substr($this->escapeHtml($bloodDonationStats['firstBloodDonationDate']),0,10); ?>
+        </td>
+      </tr>
+      <tr>
+        <th>Skuteczne donacje</th>
+        <td>
+          <?= $this->escapeHtml($bloodDonationStats['bloodDonationCount']); ?>
+        </td>
+      </tr>
+      <tr>
+        <th>Próby donacji</th>
+        <td>
+          <?= $this->escapeHtml($bloodDonationStats['bloodDonationAttemptsCount']); ?>
+        </td>
+      </tr>
+  </table>
+</div>
+<div class="col-xl-4 col-lg-6 px-3 blood-donation-stats-section">
+  <h6 class="stats-subtitle">
+    6 ostatnich donacji
+  </h6>
+  <canvas id="lastSixBloodDonationsChart" width="80" height="50"></canvas>
+</div>
+
+<div class="col-xl-4 col-lg-6 px-3 blood-donation-stats-section">
+  <h6 class="stats-subtitle">
+    Najbliższa donacja
+  </h6>
+  <table id="blood-donation-next-tab" class="table table-striped small table-responsive">
+      <tr>
+        <th>Planowana data</th>
+        <td>
+          <?= substr($this->escapeHtml($bloodDonationStats['nextPlannedDonationDate']),0,10); ?>
+        </td>
+      </tr>
+      <tr>
+        <th>Możliwa data</th>
+        <td>
+            <?= $this->escapeHtml($bloodDonationStats['nextPossibleDonationDate']); ?>
+        </td>
+      </tr>
+      <tr>
+        <th>Warunek 8 tygodni <?php echo $bloodDonationStats['eightWeeksConditionStringElements'][0]; ?></th>
+        <td class="<?php echo $bloodDonationStats['eightWeeksConditionStringElements'][1] ?>">
+          <?= substr($this->escapeHtml($bloodDonationStats['eightWeeksConditionDate']),0,10); ?>
+        </td>
+      </tr>
+      <tr>
+        <th>Warunek 6 donacji w roku <?php echo $bloodDonationStats['sixDonationsPerYearConditionStringElements'][0]; ?></th>
+        <td class="<?php echo $bloodDonationStats['sixDonationsPerYearConditionStringElements'][1]; ?>">
+          <?= substr($this->escapeHtml($bloodDonationStats['sixDonationsPerYearConditionDate']),0,10); ?>
+        </td>
+      </tr>
+  </table>
+</div>
+</div>
+</div>
+<div id="blood-donation-list">
+<h4 class="app-content-subtitle">Lista donacji</h4>
 <p>
 <a class="btn btn-secondary btn-sm" href="
     <?= $this->url('blooddonation', ['action'=>'add']); ?>">
@@ -67,5 +159,17 @@ $this->pageBreadcrumbs()->setItems([
     </tr>
 
     <?php endforeach; ?>
+</div>
+
+<?= $this->inlineScript()
+      ->prependFile($this->basePath('js/chart.js-3.8.2/package/dist/chart.min.js'))
+      ->prependFile($this->basePath('js/blooddonation.js'))
+?>
+
+<script>
+var lastSixBloodDonationsDates =  <?php echo json_encode($bloodDonationStats['lastSixBloodDonationsDates']); ?>;
+var lastSixBloodDonationsAmounts = <?php echo json_encode($bloodDonationStats['lastSixBloodDonationsAmounts']); ?>;
+</script>
+
 </tbody>
 </table>

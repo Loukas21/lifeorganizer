@@ -155,7 +155,7 @@ class PublicationForm extends Form
           ],
           'attributes' => [
             'id' => 'totality',
-            'min' => '+0',
+            'min' => '0',
             'max' => '99999',
             'step' => '1',
           ],
@@ -185,7 +185,7 @@ class PublicationForm extends Form
           ],
           'attributes' => [
             'id' => 'currentprogress',
-            'min' => '+0',
+            'min' => '0',
             'max' => '99999',
             'step' => '1',
           ],
@@ -349,6 +349,7 @@ class PublicationForm extends Form
                     'name'     => 'totality',
                     'required' => false,
                     'filters'  => [
+                      ['name' => 'Digits'],
                     ],
                     'validators' => [
                       [
@@ -400,6 +401,16 @@ class PublicationForm extends Form
                                 'inclusive' => true,
                                 'messages' => [
                                   \Laminas\Validator\GreaterThan::NOT_GREATER_INCLUSIVE => 'Aktualny postęp nie może być mniejszy od %min%',
+                                ]
+                            ],
+                        ],
+                        [
+                            'name'    => 'LessThan',
+                            'options' => [
+                                'max' => 99999,
+                                'inclusive' => true,
+                                'messages' => [
+                                  \Laminas\Validator\LessThan::NOT_LESS_INCLUSIVE => 'Aktualny postęp nie może być większy od %max%',
                                 ]
                             ],
                         ],

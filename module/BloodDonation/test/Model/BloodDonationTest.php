@@ -38,5 +38,32 @@
       $this->assertTrue($inputFilter->has('bandateto'));
 
     }
+
+    public function testClassHasAttribute()
+    {
+      //Test attributes of class BloodDonation
+      $this->assertClassHasAttribute('id', BloodDonation::class);
+      $this->assertClassHasAttribute('place', BloodDonation::class);
+      $this->assertClassHasAttribute('isPlanned', BloodDonation::class);
+      $this->assertClassHasAttribute('isDonationBanned', BloodDonation::class);
+      $this->assertClassHasAttribute('banCauseType', BloodDonation::class);
+      $this->assertClassHasAttribute('banCauseDescription', BloodDonation::class);
+      $this->assertClassHasAttribute('banDateTo', BloodDonation::class);
+      $this->assertClassHasAttribute('donatedBloodAmount', BloodDonation::class);
+      //Test attributes of parent class - Event
+      $this->assertClassHasAttribute('creationDate', BloodDonation::class);
+      $this->assertClassHasAttribute('eventDate', BloodDonation::class);
+      $this->assertClassHasAttribute('user', BloodDonation::class);
+    }
+
+    public function testBanCauseValuesAreCorrectlySet()
+    {
+      $bloodDonation = new BloodDonation();
+      $this->assertEquals($bloodDonation::BAN_CAUSE_MEDICAL_TESTS,1);
+      $this->assertEquals($bloodDonation::BAN_CAUSE_SCHEDULE,2);
+      $this->assertEquals($bloodDonation::BAN_CAUSE_SELF_RESIGNATION,3);
+      $this->assertEquals($bloodDonation::BAN_CAUSE_OTHER_CAUSE,4);
+
+    }
   }
 ?>

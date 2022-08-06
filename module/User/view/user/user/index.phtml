@@ -9,15 +9,15 @@ $this->pageBreadcrumbs()->setItems([
             ]);
 ?>
 
-<h3 class="app-content-title">Zarządzanie użytkownikami</h3>
-
+<h3 class="app-content-title">Użytkownicy</h3>
+<div id="user-list">
+<h6 class="app-content-subtitle">Lista użytkowników</h6>
 <p>
 <a class="btn btn-secondary btn-sm" href="
     <?= $this->url('users', ['action'=>'add']); ?>">
     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Dodaj użytkownika
 </a>
 </p>
-
 <table class="table table-striped small table-responsive app-data-table">
 
    <thead>
@@ -62,3 +62,4 @@ $this->pageBreadcrumbs()->setItems([
     <?php endforeach; ?>
 </tbody>
 </table>
+</div>

@@ -14,8 +14,8 @@ $this->pageBreadcrumbs()->setItems([
 <?= $this->flashMessenger()->render('success', ['alert', 'alert-success']); ?>
 <?= $this->flashMessenger()->render('info', ['alert', 'alert-info']); ?>
 
-<h3 class="app-content-title">Podgląd użytkownika <?= $this->escapeHtml($user->getEmail()) ?></h3>
-
+<h3 class="app-content-title">Użytkownicy</h3>
+<h6 class="app-content-subtitle">Podgląd użytkownika <?= $this->escapeHtml($user->getEmail()) ?></h6>
 <p>
     <a class="btn btn-secondary btn-sm" href="<?= $this->url('users',
             ['action'=>'edit', 'id'=>$user->getId()]); ?>">

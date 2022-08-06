@@ -9,12 +9,13 @@ $this->pageBreadcrumbs()->setItems([
             ]);
 ?>
 
-<h3 class="app-content-title">Zarządzanie cytatami</h3>
+<h3 class="app-content-title">Cytaty</h3>
 
 <?= $this->flashMessenger()->render('error', ['alert', 'alert-warning']); ?>
 <?= $this->flashMessenger()->render('success', ['alert', 'alert-success']); ?>
 <?= $this->flashMessenger()->render('info', ['alert', 'alert-info']); ?>
-
+<div id="quote-list">
+<h6 class="app-content-subtitle">Lista cytatów</h6>
 <p>
 <a class="btn btn-secondary btn-sm" href="
     <?= $this->url('quotes', ['action'=>'add']); ?>">
@@ -59,3 +60,4 @@ $this->pageBreadcrumbs()->setItems([
     <?php endforeach; ?>
 </tbody>
 </table>
+</div>

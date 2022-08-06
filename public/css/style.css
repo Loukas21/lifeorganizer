@@ -10,6 +10,13 @@ body
 .app-content-subtitle {
   margin-top: 20px;
   margin-bottom: 20px;
+  width: 100%;
+  padding-left: 1%;
+  padding-right: 1%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background: #606056;
+  color: white;
 }
 
 .app-content-title {

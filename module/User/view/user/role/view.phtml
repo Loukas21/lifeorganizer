@@ -9,12 +9,8 @@ $this->pageBreadcrumbs()->setItems([
             'Podgląd'=> $this->url('roles', ['action'=>'view', 'id'=>$role->getId()])
             ]);
 ?>
-
-<div class="app-content-title">
-  <h3>Podgląd roli</h3>
-  <h6><?= $this->escapeHtml($role->getName()) ?></h6>
-</div>
-
+<h3 class="app-content-title">Role</h3>
+<h6 class="app-content-subtitle">Podgląd roli <?= $this->escapeHtml($role->getName()) ?></h6>
 
 
 <?= $this->flashMessenger()->render('error', ['alert', 'alert-warning']); ?>
@@ -51,7 +47,7 @@ $this->pageBreadcrumbs()->setItems([
     </div>
 </div>
 
-<h3>Uprawnienia</h3>
+<h6 class="app-content-subtitle">Uprawnienia roli <?= $this->escapeHtml($role->getName()) ?></h6>
 
 <p>
 <a class="btn btn-secondary btn-sm" href="<?= $this->url('roles', ['action'=>'editPermissions', 'id'=>$role->getId()]) ?>">

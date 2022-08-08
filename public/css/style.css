@@ -86,6 +86,10 @@ body
   color: lightgrey;
 }
 
+.app-sidebar-active-element {
+  background: #434343;
+}
+
 .app-sidebar-border
 {
   border-bottom: 1px solid;
@@ -98,6 +102,15 @@ body
   color: white;
   text-align: left;
   box-shadow: none !important;
+}
+
+.app-sidebar-menu-link {
+  width: 100%;
+  display: inline-block;
+}
+
+.app-sidebar-menu-link:hover {
+  background: #54514A;
 }
 
 .app-content

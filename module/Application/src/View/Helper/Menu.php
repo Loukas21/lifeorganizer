@@ -53,34 +53,16 @@ class Menu extends AbstractHelper
      */
     public function render()
     {
+
+        // if sidebar menu has no options
         if (count($this->items)==0)
             return ''; // Do nothing if there are no items.
 
-        /*$result = '<nav class="navbar navbar-default" role="navigation">';
-        $result .= '<div class="navbar-header">';
-        $result .= '<button type="button" class="navbar-toggle" data-toggle="collapse"';
-        $result .= 'data-target=".navbar-ex1-collapse">';
-        $result .= '<span class="sr-only">Toggle navigation</span>';
-        $result .= '<span class="icon-bar"></span>';
-        $result .= '<span class="icon-bar"></span>';
-        $result .= '<span class="icon-bar"></span>';
-        $result .= '</button>';
-        $result .= '</div>';
-        */
-
+        // open <nav> tag and style it
         $result = '<nav class="col-lg-2 col-md-3 flex-shrink-0 p-3 app-sidebar" role="navigation">';
-        //$result .= '<div class="sidebar-header">';
-        //$result .= '<button type="button" class="navbar-toggle" data-toggle="collapse"';
-        //$result .= 'data-target=".navbar-ex1-collapse">';
-        //$result .= '<span class="sr-only">Toggle navigation</span>';
-        //$result .= '<span class="icon-bar"></span>';
-        //$result .= '<span class="icon-bar"></span>';
-        //$result .= '<span class="icon-bar"></span>';
-        //$result .= '</button>';
-        //$result .= '</div>';
-        //$result .= '<a class="d-flex align-items-center pb-3 mb-3 link-light text-decoration-none border-bottom" href"/">Strona główna</a>';
-
+        // add accordion element
         $result .= '<div class="accordion" id="accordionSidebar">';
+        // open unordered list tag
         $result .= '<ul class="list-unstyled">';
 
         // Render items
@@ -88,20 +70,11 @@ class Menu extends AbstractHelper
             if(!isset($item['float']) || $item['float']=='left')
                 $result .= $this->renderItem($item);
         }
-
+        // close unordered list tag
         $result .= '</ul>';
-        /*
-        $result .= '<ul class="nav navbar-nav navbar-right">';
-
-        // Render items
-        foreach ($this->items as $item) {
-            if(isset($item['float']) && $item['float']=='right')
-                $result .= $this->renderItem($item);
-        }
-
-        $result .= '</ul>';
-        */
+        // close accordion element
         $result .= '</div>';
+        // close <nav> tag
         $result .= '</nav>';
 
         return $result;
@@ -118,38 +91,61 @@ class Menu extends AbstractHelper
         $id = isset($item['id']) ? $item['id'] : '';
         $isActive = ($id==$this->activeItemId);
         $label = isset($item['label']) ? $item['label'] : '';
-
         $result = '';
 
         $escapeHtml = $this->getView()->plugin('escapeHtml');
-
+        //echo $this->activeItemId;
+        //echo $item['id'];
         if (isset($item['dropdown'])) {
 
             $dropdownItems = $item['dropdown'];
+            $dropdownString = "";
+            $activeDropdown = "";
+            foreach ($dropdownItems as $dropdownItem) {
+                $link = isset($dropdownItem['link']) ? $dropdownItem['link'] : '#';
+                $dropdownLabel = isset($dropdownItem['label']) ? $dropdownItem['label'] : '';
 
-            $result .= '<li class="mb-1' . ($isActive?'active':'') . '">';
-            $result .= '<button href="#" class="btn collapsed app-sidebar-btn" data-bs-toggle="collapse" data-bs-target="#'.$item['id'].'-collapse" data-parent="#accordionExample" aria-expanded="true">';
-            $result .= $escapeHtml($label);
-            $result .= '</button>';
-            $result .= '<div id="'.$item['id'].'-collapse" class="collapse" style="" data-bs-parent="#accordionSidebar">';
+                //$result .= '<li class="border-bottom app-sidebar-border">';
+                //$result .= '<a class="'."text-decoration-none px-2";
+                if ($this->activeItemId == $dropdownItem['id']){
+                  $dropdownString .= '<li class="app-sidebar-border app-sidebar-active-element">';
+                  $dropdownString .= '<a class="text-decoration-none px-2 link-light app-sidebar-menu-link active"';
+                  $activeDropdown = $item['id'];
+                }
+                else {
+                  $dropdownString .= '<li class="app-sidebar-border">';
+                  $dropdownString .= '<a class="text-decoration-none px-2 link-light app-sidebar-menu-link"';
+                }
+                $dropdownString .= ' href="'.$escapeHtml($link).'">'.$escapeHtml($dropdownLabel).'</a>';
+                $dropdownString .= '</li>';
+            }
+
+            if ($activeDropdown == $item['id']) {
+                $result .= '<li class="mb-0 active">';
+                $result .= '<button href="#" class="btn app-sidebar-btn" data-bs-toggle="collapse" data-bs-target="#'.$item['id'].'-collapse" data-parent="#accordionExample" aria-expanded="true">';
+                $result .= $escapeHtml($label);
+                $result .= '</button>';
+                $result .= '<div id="'.$item['id'].'-collapse" class="collapse show" style="" data-bs-parent="#accordionSidebar">';
+            }
+            else {
+              $result .= '<li class="mb-0">';
+              $result .= '<button href="#" class="btn collapsed app-sidebar-btn" data-bs-toggle="collapse" data-bs-target="#'.$item['id'].'-collapse" data-parent="#accordionExample" aria-expanded="false">';
+              $result .= $escapeHtml($label);
+              $result .= '</button>';
+              $result .= '<div id="'.$item['id'].'-collapse" class="collapse" style="" data-bs-parent="#accordionSidebar">';
+            }
 
             $result .= '<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small app-list-group-item">';
-            foreach ($dropdownItems as $item) {
-                $link = isset($item['link']) ? $item['link'] : '#';
-                $label = isset($item['label']) ? $item['label'] : '';
+            $result .= $dropdownString;
 
-                $result .= '<li class="border-bottom app-sidebar-border">';
-                $result .= '<a class="'."link-light text-decoration-none px-2".'"'. 'href="'.$escapeHtml($link).'">'.$escapeHtml($label).'</a>';
-                $result .= '</li>';
-            }
             $result .= '</ul>';
             $result .= '</li>';
 
         } else {
             $link = isset($item['link']) ? $item['link'] : '#';
 
-            $result .= $isActive?'<li class="active">':'<li>';
-            $result .= '<a class="link-light text-decoration-none" href="'.$escapeHtml($link).'">'.$escapeHtml($label).'</a>';
+            $result .= $isActive?'<li class="px-1 active app-sidebar-active-element">':'<li class="px-1">';
+            $result .= '<a class="link-light app-sidebar-menu-link text-decoration-none" href="'.$escapeHtml($link).'">'.$escapeHtml($label).'</a>';
             $result .= '</li>';
         }
 

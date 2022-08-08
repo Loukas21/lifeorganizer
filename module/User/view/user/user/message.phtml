@@ -19,12 +19,12 @@ $this->headTitle('Dziękujemy');
     Twoje nowe hasło zostało ustawione poprawnie.
 </p>
 <p>
-    Powrót do <a href="<?= $this->url('login'); ?>">login page</a>.
+    Powrót do <a href="<?= $this->url('login'); ?>">strony logowania</a>.
 </p>
 <?php elseif ($id=='failed'): ?>
 
     Nieprawidłowy kod lub kod wygasł. Ponów próbę
-    <a href="<?= $this->url('reset-password') ?>">here</a> and try reset your password again.
+    <a href="<?= $this->url('reset-password') ?>">tutaj</a> i spróbuj ponownie zresetować swoje hasło.
 </p>
 <?php endif; ?>
 </div>

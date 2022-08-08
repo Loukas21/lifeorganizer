@@ -83,6 +83,7 @@
               // and if so, use it for setting active navbar item.
               if (isset($activeMenuItemId)) {
                   $this->mainMenu()->setActiveItemId($activeMenuItemId);
+                  echo $activeMenuItemId;
               }
 
               // Render the navbar

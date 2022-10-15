@@ -14,6 +14,12 @@ use Publication\Form\Validator as CustomPublicationValidator;
 class PublicationForm extends Form
 {
     /**
+     * Publication Type ('book' or 'recording').
+     * @var string
+     */
+    private $publicationType;
+
+    /**
      * Scenario ('create' or 'update').
      * @var string
      */
@@ -35,7 +41,7 @@ class PublicationForm extends Form
     /**
      * Constructor.
      */
-    public function __construct($scenario = 'create', $entityManager = null, $publication = null)
+    public function __construct($publicationType = 'book', $scenario = 'create', $entityManager = null, $publication = null)
     {
         // Define form name
         parent::__construct('publication-form');
@@ -44,6 +50,7 @@ class PublicationForm extends Form
         $this->setAttribute('method', 'post');
 
         // Save parameters for internal use.
+        $this->publicationType = $publicationType;
         $this->scenario = $scenario;
         $this->entityManager = $entityManager;
         $this->publication = $publication;
@@ -116,23 +123,21 @@ class PublicationForm extends Form
             'options' => [
                 'label' => 'Typ',
                 'value_options' => [
-                    '0' => '--wybierz--',
-                    '1' => 'książka',
-                    '2' => 'ebook',
-                    '3' => 'audiobook',
-                    '4' => 'artykuł',
-                //    '5' => 'audycja',
-                //    '6' => 'wykład',
-                //    '7' => 'film',
-                //    '8' => 'podcast'
+                  '0' => '--wybierz--',
+                  '1' => 'książka',
+                  '2' => 'ebook',
+                  '3' => 'audiobook',
+                  '4' => 'artykuł',
+                  '5' => 'audycja',
+                  '6' => 'wykład',
+                  '7' => 'film',
+                  '8' => 'podcast'
                 ],
             ],
             'attributes' => [
                 'id' => 'type'
             ],
         ]);
-
-
 
         //Add "ishiddeninvcv" field
         $this->add([
@@ -254,6 +259,15 @@ class PublicationForm extends Form
                             ],
                         ],
                     ],
+                    [
+                        'name'    => 'Regex',
+                        'options' => [
+                            'messages' => [
+                              \Laminas\Validator\Regex::NOT_MATCH => 'W polu autor wyrazy nie powinny być dłuższe niż 30 znaków.',
+                            ],
+                            'pattern' => '(^((?!(([^\s]){31,})).)*$)',
+                        ],
+                    ],
                 ],
             ]);
 
@@ -281,6 +295,15 @@ class PublicationForm extends Form
                             'messages' => [
                               \Laminas\Validator\NotEmpty::IS_EMPTY => 'Tytuł nie może być pusty'
                             ],
+                        ],
+                    ],
+                    [
+                        'name'    => 'Regex',
+                        'options' => [
+                            'messages' => [
+                              \Laminas\Validator\Regex::NOT_MATCH => 'W polu tytuł wyrazy nie powinny być dłuższe niż 30 znaków.',
+                            ],
+                            'pattern' => '(^((?!(([^\s]){31,})).)*$)',
                         ],
                     ],
                 ],

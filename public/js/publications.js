@@ -47,6 +47,10 @@ $(document).ready(function() {
     // disable 'isfinished' checkbox
     $('#isfinished').prop("disabled", "disabled");
   }
+
+  $("#publications-book-list").hide();
+  $("#publications-recording-list").hide();
+  $("#publications-wish-list").hide();
 });
 
 //after click 'iswanted' checkbox
@@ -149,4 +153,68 @@ $('#isfinished').on("click", function() {
     // enable 'currentprogress' field
     $('#currentprogress').prop("disabled", "");
   }
+});
+
+//nav tabs - click publications dashboard bookmark button
+$('#publications-dashboard-btn').on("click", function() {
+  $("#publications-book-list").hide();
+  $("#publications-recording-list").hide();
+  $("#publications-wish-list").hide();
+  $("#publications-dashboard").show();
+  $("#publications-dashboard-btn").removeClass('btn-light');
+  $("#publications-dashboard-btn").addClass('btn-secondary');
+  $("#publications-book-list-btn").removeClass('btn-secondary');
+  $("#publications-book-list-btn").addClass('btn-light');
+  $("#publications-recording-list-btn").removeClass('btn-secondary');
+  $("#publications-recording-list-btn").addClass('btn-light');
+  $("#publications-wish-list-btn").removeClass('btn-secondary');
+  $("#publications-wish-list-btn").addClass('btn-light');
+});
+
+//nav tabs - click publications book list bookmark button
+$('#publications-book-list-btn').on("click", function() {
+  $("#publications-recording-list").hide();
+  $("#publications-wish-list").hide();
+  $("#publications-dashboard").hide();
+  $("#publications-book-list").show();
+  $("#publications-dashboard-btn").removeClass('btn-secondary');
+  $("#publications-dashboard-btn").addClass('btn-light');
+  $("#publications-book-list-btn").removeClass('btn-light');
+  $("#publications-book-list-btn").addClass('btn-secondary');
+  $("#publications-recording-list-btn").removeClass('btn-secondary');
+  $("#publications-recording-list-btn").addClass('btn-light');
+  $("#publications-wish-list-btn").removeClass('btn-secondary');
+  $("#publications-wish-list-btn").addClass('btn-light');
+});
+
+//nav tabs - click publications recording list bookmark button
+$('#publications-recording-list-btn').on("click", function() {
+  $("#publications-recording-list").show();
+  $("#publications-wish-list").hide();
+  $("#publications-dashboard").hide();
+  $("#publications-book-list").hide();
+  $("#publications-dashboard-btn").removeClass('btn-secondary');
+  $("#publications-dashboard-btn").addClass('btn-light');
+  $("#publications-book-list-btn").addClass('btn-light');
+  $("#publications-book-list-btn").removeClass('btn-secondary');
+  $("#publications-recording-list-btn").addClass('btn-secondary');
+  $("#publications-recording-list-btn").removeClass('btn-light');
+  $("#publications-wish-list-btn").removeClass('btn-secondary');
+  $("#publications-wish-list-btn").addClass('btn-light');
+});
+
+//nav tabs - click publications wish list bookmark button
+$('#publications-wish-list-btn').on("click", function() {
+  $("#publications-recording-list").hide();
+  $("#publications-wish-list").show();
+  $("#publications-dashboard").hide();
+  $("#publications-book-list").hide();
+  $("#publications-dashboard-btn").removeClass('btn-secondary');
+  $("#publications-dashboard-btn").addClass('btn-light');
+  $("#publications-book-list-btn").addClass('btn-light');
+  $("#publications-book-list-btn").removeClass('btn-secondary');
+  $("#publications-recording-list-btn").removeClass('btn-secondary');
+  $("#publications-recording-list-btn").addClass('btn-light');
+  $("#publications-wish-list-btn").addClass('btn-secondary');
+  $("#publications-wish-list-btn").removeClass('btn-light');
 });

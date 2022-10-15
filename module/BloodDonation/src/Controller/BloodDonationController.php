@@ -68,13 +68,18 @@ class BloodDonationController extends AbstractActionController
       'sixDonationsPerYearConditionStringElements' => ['',''],
       'nextSixPlannedBloodDonationsDates' => [],
       'nextPossibleDonationDate' => '',
-      'nextPlannedDonationDate' => ''
+      'nextPlannedDonationDate' => '',
+      'lastSixBloodDonations' => [],
     ];
 
     //fill successful blood donation dates array with empty values
     $successfulBloodDonationDates = ['','','','','',''];
     //fill planned blood donation dates array with empty values
     $plannedBloodDonationDates = ['','','','','',''];
+
+    $successfulBloodDonations = [
+
+    ];
 
     // iterate blood donation records
     foreach ($bloodDonations as $donation) {
@@ -86,31 +91,7 @@ class BloodDonationController extends AbstractActionController
           $bloodDonationStats['bloodDonationAttemptsCount'] = $bloodDonationStats['bloodDonationAttemptsCount'] + 1;
           // only for donations which were not banned
           if ($donation->getIsDonationBanned() == false) {
-            array_push($successfulBloodDonationDates,$donation->getEventDate());
-            // count successful blood donations
-            $bloodDonationStats['bloodDonationCount'] = $bloodDonationStats['bloodDonationCount'] + 1;
-            // check if is the initial iteration of first blood donation date
-            if ($bloodDonationStats['firstBloodDonationDate'] == ''){
-              //replace empty value  in array with value from entity
-              $bloodDonationStats['firstBloodDonationDate'] = $donation->getEventDate();
-            }
-            // check if the current value in array is greater than current value from entity
-            elseif ($bloodDonationStats['firstBloodDonationDate'] > $donation->getEventDate())
-            {
-              // replace with value from entity which is less than current value
-              $bloodDonationStats['firstBloodDonationDate'] = $donation->getEventDate();
-            }
-            // check if is the initial iteration of last blood donation date
-            if ($bloodDonationStats['lastBloodDonationDate'] == ''){
-              //replace empty value  in array with value from entity
-              $bloodDonationStats['lastBloodDonationDate'] = $donation->getEventDate();
-            }
-            // check if the current value in array is less than current value from entity
-            elseif ($bloodDonationStats['lastBloodDonationDate'] < $donation->getEventDate())
-            {
-              // replace with value from entity which is greater than current value
-              $bloodDonationStats['lastBloodDonationDate'] = $donation->getEventDate();
-            }
+            array_push($successfulBloodDonations,['date' => substr($donation->getEventDate(),0,10), 'amount' => $donation->getDonatedBloodAmount()]);
           }
         }
         else {
@@ -118,23 +99,33 @@ class BloodDonationController extends AbstractActionController
           array_push($plannedBloodDonationDates,$donation->getEventDate());
         }
     }
+    $bloodDonationStats['bloodDonationCount'] = count($successfulBloodDonations);
+    foreach ($successfulBloodDonations as $key => $row) {
+      $date[$key] = $row['date'];
+      $amount[$key] = $row['amount'];
+    }
+
+    $date  = array_column($successfulBloodDonations, 'date');
+    $amount = array_column($successfulBloodDonations, 'amount');
+
+    array_multisort($date, SORT_DESC, $amount, SORT_ASC, $successfulBloodDonations);
+
+    $bloodDonationStats['firstBloodDonationDate'] = end($successfulBloodDonations)['date'];
+
+    $bloodDonationStats['lastBloodDonationDate'] = $successfulBloodDonations[0]['date'];
+
+    $bloodDonationStats['lastSixBloodDonations'] = array_slice($successfulBloodDonations,0,6);
+
+    $bloodDonationStats['lastSixBloodDonationsDates']  = array_column($bloodDonationStats['lastSixBloodDonations'], 'date');
+    $bloodDonationStats['lastSixBloodDonationsAmounts'] = array_column($bloodDonationStats['lastSixBloodDonations'], 'amount');
+
     //sort successful blood donation dates
-    rsort($successfulBloodDonationDates);
+    rsort($successfulBloodDonationDates,);
     //sort planned blood donation dates
     rsort($plannedBloodDonationDates);
 
     //choose 6 most recent and 6 closest donations
     for ($i = 0; $i <= 5; $i++) {
-        // choose 6 most recent ones
-        $bloodDonationStats['lastSixBloodDonationsDates'][$i] = substr($successfulBloodDonationDates[$i],0,10);
-        if ($bloodDonationStats['lastSixBloodDonationsDates'][$i] == "")
-        {
-            $bloodDonationStats['lastSixBloodDonationsAmounts'][$i] = 0;
-        }
-        else {
-            $bloodDonationStats['lastSixBloodDonationsAmounts'][$i] = 450;
-        }
-
         // choose 6 closest ones
         $bloodDonationStats['nextSixPlannedBloodDonationsDates'][$i] = substr($plannedBloodDonationDates[5-$i],0,10);
     }

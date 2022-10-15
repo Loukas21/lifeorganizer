@@ -138,6 +138,15 @@ class QuoteForm extends Form
                             ],
                         ],
                     ],
+                    [
+                        'name'    => 'Regex',
+                        'options' => [
+                            'messages' => [
+                              \Laminas\Validator\Regex::NOT_MATCH => 'W polu autor wyrazy nie powinny być dłuższe niż 30 znaków.',
+                            ],
+                            'pattern' => '(^((?!(([^\s]){31,})).)*$)',
+                        ],
+                    ],
                 ],
             ]);
 
@@ -164,6 +173,15 @@ class QuoteForm extends Form
                             'messages' => [
                               \Laminas\Validator\NotEmpty::IS_EMPTY => 'Cytat nie może być pusty'
                             ],
+                        ],
+                    ],
+                    [
+                        'name'    => 'Regex',
+                        'options' => [
+                            'messages' => [
+                              \Laminas\Validator\Regex::NOT_MATCH => 'W polu cytat wyrazy nie powinny być dłuższe niż 30 znaków.',
+                            ],
+                            'pattern' => '(^((?!(([^\s]){31,})).)*$)',
                         ],
                     ],
                 ],

@@ -3,14 +3,14 @@ namespace Publication\Controller\Factory;
 
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
-use Publication\Controller\BookController;
+use Publication\Controller\PublicationController;
 use Publication\Service\PublicationManager;
 
 /**
  * This is the factory for BookController. Its purpose is to instantiate the
  * controller and inject dependencies into it.
  */
-class BookControllerFactory implements FactoryInterface
+class PublicationControllerFactory implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
@@ -18,6 +18,6 @@ class BookControllerFactory implements FactoryInterface
         $publicationManager = $container->get(PublicationManager::class);
 
         // Instantiate the controller and inject dependencies
-        return new BookController($entityManager, $publicationManager);
+        return new PublicationController($entityManager, $publicationManager);
     }
 }

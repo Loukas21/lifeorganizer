@@ -14,7 +14,7 @@ class PublicationRepository extends EntityRepository
      * Retrieves all publications in descending id order.
      * @return Query
      */
-    public function findPublicationsByUser($userid,$types)
+    public function findPublicationsByUserAndTypes($userid,$types)
     {
 
         $entityManager = $this->getEntityManager();
@@ -25,8 +25,7 @@ class PublicationRepository extends EntityRepository
             ->from(Publication::class, 'u')
             ->where('u.user = :userid')
             ->setParameter('userid', $userid)
-            //->andWhere($queryBuilder->expr()->in('u.type = :types'))
-            //->setParameter('types', $types)
+            ->andWhere($queryBuilder->expr()->in('u.type', $types))
             ->orderBy('u.id', 'DESC');
 
 

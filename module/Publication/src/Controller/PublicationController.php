@@ -9,7 +9,7 @@ use Application\Entity\Post;
 use Publication\Entity\Publication;
 use Publication\Form\PublicationForm;
 
-class BookController extends AbstractActionController
+class PublicationController extends AbstractActionController
 {
   /**
    * Entity manager.
@@ -31,7 +31,7 @@ class BookController extends AbstractActionController
 
   public function indexAction()
   {
-    if (!$this->access('books.manage')){
+    if (!$this->access('publications.manage')){
       $this->getResponse()->setStatusCode(401);
       return;
     }
@@ -48,12 +48,29 @@ class BookController extends AbstractActionController
       $userid = $user->getId();
     }
     /*END OF OWN CODE*/
-
+    /*
     $publications = $this->entityManager->getRepository(Publication::class)
               ->findBy(['user'=>$userid], ['id'=>'DESC']); //OWN CODE ELEMENT
+    */
+    $bookTypes = [1,2,3,4];
+    $booksQuery = $this->entityManager->getRepository(Publication::class)
+              -> findPublicationsByUserAndTypes($userid,$bookTypes);
+    $books = $booksQuery->getResult();
+
+    $recordingTypes = [5,6,7,8];
+    $recordingsQuery = $this->entityManager->getRepository(Publication::class)
+              -> findPublicationsByUserAndTypes($userid,$recordingTypes);
+    $recordings = $recordingsQuery->getResult();
+
+    $wishListTypes = [0];
+    $wishListQuery = $this->entityManager->getRepository(Publication::class)
+              -> findPublicationsByUserAndTypes($userid,$wishListTypes);
+    $wishList = $wishListQuery->getResult();
 
     return new ViewModel([
-      'publications' => $publications
+      'books' => $books,
+      'recordings' => $recordings,
+      'wishList' => $wishList
     ]);
   }
 
@@ -73,7 +90,7 @@ class BookController extends AbstractActionController
 
     /*END OF OWN CODE*/
 
-    $form = new PublicationForm('create', $this->entityManager);
+    $form = new PublicationForm('book', 'create', $this->entityManager);
 
     if ($this->getRequest()->isPost()) {
       $data = $this->params()->fromPost();
@@ -85,7 +102,7 @@ class BookController extends AbstractActionController
 
         $publication = $this->publicationManager->addPublication($data);
 
-        return $this->redirect()->toRoute('books',
+        return $this->redirect()->toRoute('publications',
               ['action' => 'index']); //tu albo akcja view z Id albo akcja indexAction
       }
       else {
@@ -120,7 +137,7 @@ class BookController extends AbstractActionController
       return;
     }
 
-    $form = new PublicationForm('update', $this->entityManager, $publication);
+    $form = new PublicationForm('book', 'update', $this->entityManager, $publication);
 
     if ($this->getRequest()->isPost()) {
       $data = $this->params()->fromPost();
@@ -132,7 +149,7 @@ class BookController extends AbstractActionController
 
         $this->publicationManager->updatePublication($publication, $data);
 
-        return $this->redirect()->toRoute('books',
+        return $this->redirect()->toRoute('publications',
                     ['action' => 'index']);
 
       }
@@ -194,7 +211,7 @@ class BookController extends AbstractActionController
       $this->flashMessenger()->addSuccessMessage('Publikacja została usunięta.');
 
       // Redirect to "index" page
-      return $this->redirect()->toRoute('books', ['action'=>'index']);
+      return $this->redirect()->toRoute('publications', ['action'=>'index']);
   }
 
 }

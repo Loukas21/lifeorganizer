@@ -1,12 +1,12 @@
 <?php
-$this->headTitle('Dodawanie książki');
+$this->headTitle('Edycja publikacji');
 
-$this->mainMenu()->setActiveItemId('books');
+$this->mainMenu()->setActiveItemId('publications');
 
 $this->pageBreadcrumbs()->setItems([
             'Strona główna'=>$this->url('home'),
-            'Książki'=>$this->url('books'),
-            'Dodawanie'=>$this->url('books', ['action'=>'add'])
+            'Książki'=>$this->url('publications'),
+            'Edycja'=>$this->url('publications', ['action'=>'edit', 'id'=>$publication->getId()])
             ]);
 
 $form->get('author')->setAttributes([
@@ -19,6 +19,9 @@ $form->get('title')->setAttributes([
     'placeholder'=>'wpisz tytuł'
     ]);
 
+$form->get('iswanted')->setAttributes([
+    ]);
+
 $form->get('type')->setAttributes([
     'class'=>'form-control'
     ]);
@@ -28,28 +31,38 @@ $form->get('description')->setAttributes([
     'placeholder'=>'wpisz opis'
     ]);
 
-$form->get('iswanted')->setAttributes([
+$form->get('totality')->setAttributes([
+    'class'=>'form-control',
     ]);
 
-$form->get('totality')->setAttributes([
+$form->get('currentprogress')->setAttributes([
+    'class'=>'form-control',
+    ]);
+
+$form->get('isfinished')->setAttributes([
     ]);
 
 $form->get('ishiddeninvcv')->setAttributes([
     ]);
 
-$form->get('submit')->setAttributes(['class'=>'btn btn-primary btn-sm']);
+$form->get('submit')
+        ->setAttributes(['class'=>'btn btn-primary btn-sm'])
+        ->setValue('Zapisz');
 
 $form->prepare();
 ?>
 
 <h3 class="app-content-title">Książki</h3>
-<h6 class="app-content-subtitle">Dodawanie książki</h6>
+<h6 class="app-content-subtitle">Edycja książki</h6>
 <div class="row">
     <div class="col-md-6">
         <?= $this->form()->openTag($form); ?>
 
         <div class="form-group">
             <?= $this->formElement($form->get('user')); ?>
+        </div>
+        <div class="form-group">
+            <?= $this->formElement($form->get('id')); ?>
         </div>
 
         <div class="form-group">
@@ -87,6 +100,17 @@ $form->prepare();
             <?= $this->formElement($form->get('totality')); ?>
             <?= $this->formElementErrors($form->get('totality')); ?>
         </div>
+        <div class="form-check-label form-group">
+            <?= $this->formLabel($form->get('currentprogress')); ?>
+            <?= $this->formElement($form->get('currentprogress')); ?>
+            <?= $this->formElementErrors($form->get('currentprogress')); ?>
+        </div>
+        </br>
+        <div class="form-check-label">
+            <?= $this->formLabel($form->get('isfinished')); ?>
+            <?= $this->formElement($form->get('isfinished')); ?>
+            <?= $this->formElementErrors($form->get('isfinished'));?>
+        </div>
         </br>
         <div class="form-check-label">
             <?= $this->formLabel($form->get('ishiddeninvcv')); ?>
@@ -103,5 +127,5 @@ $form->prepare();
 </div>
 
 <?= $this->inlineScript()
-      ->prependFile($this->basePath('js/publications.js'))
+      //->prependFile($this->basePath('js/publications.js'))
 ?>

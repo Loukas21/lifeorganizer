@@ -1,11 +1,11 @@
 <?php
-namespace BookTest\Controller;
+namespace PublicationTest\Controller;
 
-use Publication\Controller\BookController;
+use Publication\Controller\PublicationController;
 use Laminas\Stdlib\ArrayUtils;
 use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
-class BookControllerTest extends AbstractHttpControllerTestCase
+class PublicationControllerTest extends AbstractHttpControllerTestCase
 {
     protected function setUp() : void
     {
@@ -33,12 +33,12 @@ class BookControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('QuoteController');
         $this->assertMatchedRouteName('quote');
         */
-        $this->dispatch('/books');
+        $this->dispatch('/publications');
         $this->assertResponseStatusCode(302);
         $this->assertModuleName('publication');
-        $this->assertControllerName(BookController::class);
-        $this->assertControllerClass('BookController');
-        $this->assertMatchedRouteName('books');
+        $this->assertControllerName(PublicationController::class);
+        $this->assertControllerClass('PublicationController');
+        $this->assertMatchedRouteName('publications');
     }
     /*
     public function testIndexActionViewModelTemplateRenderedWithinLayout()

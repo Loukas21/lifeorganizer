@@ -261,6 +261,21 @@ class BloodDonationForm extends Form
                     'filters'  => [
                     ],
                     'validators' => [
+                      [
+                          'name'    => CustomBloodDonationValidator\CallbackDonationDateGreaterThanTodayIsPlanned::class,
+                          'options' => [
+                            'callback' => function($value, $context=[]) {
+                                if ($context['isplanned'] != 1) {
+                                  $donationDate = $value;
+                                  $today = date("Y-m-d H:i:s", mktime(23,59,59));
+                                  if ($donationDate > $today) {
+                                    return false;
+                                  }
+                                }
+                              return true;
+                            }
+                          ]
+                      ],
                     ],
                 ]);
 

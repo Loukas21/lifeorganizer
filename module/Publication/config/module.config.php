@@ -8,30 +8,16 @@ use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 return [
     'router' => [
         'routes' => [
-            'books' => [
+            'publications' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/books[/:action[/:id]]',
+                    'route'    => '/publications[/:action[/:id]]',
                     'constraints' => [
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id' => '[a-zA-Z0-9_-]*',
                     ],
                     'defaults' => [
-                        'controller'    => Controller\BookController::class,
-                        'action'        => 'index',
-                    ],
-                ],
-            ],
-            'recordings' => [
-                'type'    => Segment::class,
-                'options' => [
-                    'route'    => '/recordings[/:action[/:id]]',
-                    'constraints' => [
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'id' => '[a-zA-Z0-9_-]*',
-                    ],
-                    'defaults' => [
-                        'controller'    => Controller\RecordingController::class,
+                        'controller'    => Controller\PublicationController::class,
                         'action'        => 'index',
                     ],
                 ],
@@ -40,8 +26,7 @@ return [
     ],
     'controllers' => [
         'factories' => [
-            Controller\BookController::class => Controller\Factory\BookControllerFactory::class,
-            Controller\RecordingController::class => Controller\Factory\RecordingControllerFactory::class
+            Controller\PublicationController::class => Controller\Factory\PublicationControllerFactory::class,
         ],
     ],
     // We register module-provided controller plugins under this key.
@@ -51,17 +36,11 @@ return [
     // access to certain controller actions for unauthorized visitors.
     'access_filter' => [
         'controllers' => [
-            Controller\BookController::class => [
+            Controller\PublicationController::class => [
                 // Give access to anyone.
                 ['actions' => [], 'allow' => '*'],
-                // Give access to users having the "books.manage" permission.
-                ['actions' => ['index', 'add', 'edit', 'delete'], 'allow' => '+books.manage']
-            ],
-            Controller\RecordingController::class => [
-                // Give access to anyone.
-                ['actions' => [], 'allow' => '*'],
-                // Give access to users having the "books.manage" permission.
-                ['actions' => ['index', 'add', 'edit', 'delete'], 'allow' => '+recordings.manage']
+                // Give access to users having the "publications.manage" permission.
+                ['actions' => ['index', 'add', 'edit', 'delete'], 'allow' => '+publications.manage']
             ],
         ]
     ],

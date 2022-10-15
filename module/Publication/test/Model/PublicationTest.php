@@ -1,11 +1,11 @@
 <?php
-  namespace BookTest\Model;
+  namespace PublicationTest\Model;
 
   use Publication\Entity\Publication;
   use Publication\Form\PublicationForm;
   use PHPUnit\Framework\TestCase;
 
-  class BookTest extends testCase
+  class PublicationTest extends testCase
   {
     public function testInitialQuoteValuesAreNull()
     {

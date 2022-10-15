@@ -273,6 +273,16 @@ class LanguageForm extends Form
                 'filters'  => [
                 ],
                 'validators' => [
+                  [
+                    'name'    => 'LessThan',
+                    'options' => [
+                        'max' => date("Y-m-d H:i:s", mktime(23,59,59)),
+                        'inclusive' => true,
+                        'messages' => [
+                          \Laminas\Validator\LessThan::NOT_LESS_INCLUSIVE => 'Data wystawienia certyfikatu nie może być późniejsza niż bieżąca.'
+                        ],
+                    ],
+                  ],
                 ],
             ]);
     }

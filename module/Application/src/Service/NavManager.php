@@ -311,19 +311,11 @@ class NavManager
                         ];
             }
 
-            if ($this->rbacManager->isGranted(null, 'books.manage')) {
+            if ($this->rbacManager->isGranted(null, 'publications.manage')) {
                 $referencesDropdownItems[] = [
-                            'id' => 'books',
-                            'label' => 'Książki',
-                            'link' => $url('books')
-                        ];
-            }
-
-            if ($this->rbacManager->isGranted(null, 'recordings.manage')) {
-                $referencesDropdownItems[] = [
-                            'id' => 'recordings',
-                            'label' => 'Nagrania',
-                            'link' => $url('about')
+                            'id' => 'publications',
+                            'label' => 'Publikacje',
+                            'link' => $url('publications')
                         ];
             }
 

@@ -42,7 +42,12 @@ class PublicationManager
     // Always displayed fields on add form
     $publication->setTitle($data['title']);
     $publication->setAuthor($data['author']);
-    $publication->setType($data['type']);
+    if ($data['type'] == null) {
+        $publication->setType(0);
+    }
+    else {
+        $publication->setType($data['type']);
+    }
     $publication->setDescription($data['description']);
     $publication->setIsHiddenInVcv($data['ishiddeninvcv']);
     // IsWanted field
@@ -74,7 +79,12 @@ class PublicationManager
     // set 'iswanted'
     $publication->setIsWanted($data['iswanted']);
     // set 'type'
-    $publication->setType($data['type']);
+    if ($data['type'] == null) {
+        $publication->setType(0);
+    }
+    else {
+        $publication->setType($data['type']);
+    }
     // set 'description'
     $publication->setDescription($data['description']);
     // set 'ishiddeninvcv'

@@ -305,7 +305,7 @@ class Language
     {
         $certificateString = "";
         if ($this->hasCertificate == true) {
-          $certificateString .= '<i class="fas fa-graduation-cap" title="'.$this->getCertificateDescription().'"></i>';
+          $certificateString .= '<i class="fas fa-graduation-cap" title="'.htmlentities($this->getCertificateDescription()).'"></i>';
         }
         return $certificateString;
     }

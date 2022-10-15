@@ -1,0 +1,199 @@
+<?php
+$this->headTitle('Zarządzanie książkami');
+
+$this->mainMenu()->setActiveItemId('publications');
+
+$this->pageBreadcrumbs()->setItems([
+            'Strona główna'=>$this->url('home'),
+            'Książki'=>$this->url('publications'),
+            ]);
+?>
+
+<h3 class="app-content-title">Publikacje</h3>
+<div class="bookmarks-bar">
+  <ul class="nav nav-pills">
+  <li class="nav-item">
+    <button id='publications-dashboard-btn' class="btn btn-secondary" aria-current="page" href="#">Podsumowanie</button>
+  </li>
+  <li class="nav-item">
+      <button id='publications-book-list-btn' class="btn btn-light" href="#" tabindex="-1" aria-disabled="true">Lista książek</button>
+  </li>
+  <li class="nav-item">
+      <button id='publications-recording-list-btn' class="btn btn-light" href="#" tabindex="-1" aria-disabled="true">Lista nagrań</button>
+  </li>
+  <li class="nav-item">
+      <button id='publications-wish-list-btn' class="btn btn-light" href="#" tabindex="-1" aria-disabled="true">Lista życzeń</button>
+  </li>
+</ul>
+</div>
+<?= $this->flashMessenger()->render('error', ['alert', 'alert-warning']); ?>
+<?= $this->flashMessenger()->render('success', ['alert', 'alert-success']); ?>
+<?= $this->flashMessenger()->render('info', ['alert', 'alert-info']); ?>
+<div id="publications-dashboard">
+  <h6 class="app-content-subtitle">Podsumowanie</h6>
+</div>
+<div id="publications-book-list">
+<h6 class="app-content-subtitle">Lista książek</h6>
+<p>
+<a class="btn btn-secondary btn-sm" href="
+    <?= $this->url('publications', ['action'=>'add']); ?>">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Dodaj Książkę
+</a>
+</p>
+
+<table class="table table-striped small table-responsive app-data-table">
+
+   <thead>
+        <th>Autor</th>
+        <th class='nosort noorder'></th>
+        <th>Tytuł</th>
+        <th class='nosort noorder'>Postęp</th>
+        <th class='nosort noorder'>Akcje</th>
+    </thead>
+    <tbody>
+    <?php foreach ($books as $book): ?>
+
+    <tr>
+        <td>
+                <?= $this->escapeHtml($book->getAuthor()); ?>
+        </td>
+        <td>
+                <?php echo $book->getIconAsString(); ?>
+        </td>
+        <td>
+          <!--<a href="<?= $this->url('publications', ['action'=>'view', 'id'=>$book->getId()]); ?>">-->
+            <?=  $this->escapeHtml($book->getTitle()); ?></a>
+            <!--</a>-->
+        </td>
+        <td>
+                <?php echo $book->getProgressAsString(); ?>
+        </td>
+        <td>
+            <nobr>
+            <a class="btn btn-secondary btn-sm" href="<?= $this->url('publications',
+                    ['action'=>'edit', 'id'=>$book->getId()]); ?>">
+                <span class="glyphicon glyphicon-pencil" ></span> Edytuj
+            </a>
+            <a class="btn btn-secondary btn-sm" href="<?= $this->url('publications',
+                    ['action'=>'delete', 'id'=>$book->getId()]); ?>" onclick="return confirm ('Czy na pewno chcesz usunąć ten rekord?')">
+                <span class="glyphicon glyphicon-remove"></span> Usuń
+            </a>
+          </nobr>
+        </td>
+    </tr>
+
+    <?php endforeach; ?>
+</tbody>
+</table>
+</div>
+<div id="publications-recording-list">
+  <h6 class="app-content-subtitle">Lista nagrań</h6>
+  <p>
+  <a class="btn btn-secondary btn-sm" href="
+      <?= $this->url('publications', ['action'=>'add']); ?>">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Dodaj Nagranie
+  </a>
+  </p>
+  <table class="table table-striped small table-responsive app-data-table">
+
+     <thead>
+          <th>Autor</th>
+          <th class='nosort noorder'></th>
+          <th>Tytuł</th>
+          <th class='nosort noorder'>Postęp</th>
+          <th class='nosort noorder'>Akcje</th>
+      </thead>
+      <tbody>
+      <?php foreach ($recordings as $recording): ?>
+
+      <tr>
+          <td>
+                  <?= $this->escapeHtml($recording->getAuthor()); ?>
+          </td>
+          <td>
+                  <?php echo $recording->getIconAsString(); ?>
+          </td>
+          <td>
+            <!--<a href="<?= $this->url('publications', ['action'=>'view', 'id'=>$recording->getId()]); ?>">-->
+              <?=  $this->escapeHtml($recording->getTitle()); ?></a>
+              <!--</a>-->
+          </td>
+          <td>
+                  <?php echo $recording->getProgressAsString(); ?>
+          </td>
+          <td>
+              <nobr>
+              <a class="btn btn-secondary btn-sm" href="<?= $this->url('publications',
+                      ['action'=>'edit', 'id'=>$recording->getId()]); ?>">
+                  <span class="glyphicon glyphicon-pencil" ></span> Edytuj
+              </a>
+              <a class="btn btn-secondary btn-sm" href="<?= $this->url('publications',
+                      ['action'=>'delete', 'id'=>$recording->getId()]); ?>" onclick="return confirm ('Czy na pewno chcesz usunąć ten rekord?')">
+                  <span class="glyphicon glyphicon-remove"></span> Usuń
+              </a>
+            </nobr>
+          </td>
+      </tr>
+
+      <?php endforeach; ?>
+  </tbody>
+  </table>
+</div>
+<div id="publications-wish-list">
+  <h6 class="app-content-subtitle">Lista życzeń</h6>
+  <p>
+  <a class="btn btn-secondary btn-sm" href="
+      <?= $this->url('publications', ['action'=>'add']); ?>">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Dodaj Publikację
+  </a>
+  </p>
+  <table class="table table-striped small table-responsive app-data-table">
+
+     <thead>
+          <th>Autor</th>
+          <th class='nosort noorder'></th>
+          <th>Tytuł</th>
+          <th class='nosort noorder'>Postęp</th>
+          <th class='nosort noorder'>Akcje</th>
+      </thead>
+      <tbody>
+      <?php foreach ($wishList as $wishListElement): ?>
+
+      <tr>
+          <td>
+                  <?= $this->escapeHtml($wishListElement->getAuthor()); ?>
+          </td>
+          <td>
+                  <?php echo $wishListElement->getIconAsString(); ?>
+          </td>
+          <td>
+            <!--<a href="<?= $this->url('publications', ['action'=>'view', 'id'=>$wishListElement->getId()]); ?>">-->
+              <?=  $this->escapeHtml($wishListElement->getTitle()); ?></a>
+              <!--</a>-->
+          </td>
+          <td>
+                  <?php echo $wishListElement->getProgressAsString(); ?>
+          </td>
+          <td>
+              <nobr>
+              <a class="btn btn-secondary btn-sm" href="<?= $this->url('publications',
+                      ['action'=>'edit', 'id'=>$wishListElement->getId()]); ?>">
+                  <span class="glyphicon glyphicon-pencil" ></span> Edytuj
+              </a>
+              <a class="btn btn-secondary btn-sm" href="<?= $this->url('publications',
+                      ['action'=>'delete', 'id'=>$wishListElement->getId()]); ?>" onclick="return confirm ('Czy na pewno chcesz usunąć ten rekord?')">
+                  <span class="glyphicon glyphicon-remove"></span> Usuń
+              </a>
+            </nobr>
+          </td>
+      </tr>
+
+      <?php endforeach; ?>
+  </tbody>
+  </table>
+</div>
+
+<?= $this->inlineScript()
+      ->prependFile($this->basePath('js/chart.js-3.8.2/package/dist/chart.min.js'))
+      ->prependFile($this->basePath('js/publications.js'))
+?>

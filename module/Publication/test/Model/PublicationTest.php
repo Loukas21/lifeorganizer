@@ -32,10 +32,10 @@
       $this->assertTrue($inputFilter->has('type'));
       $this->assertTrue($inputFilter->has('description'));
       $this->assertTrue($inputFilter->has('totality'));
-      $this->assertTrue($inputFilter->has('currentprogress'));
-      $this->assertTrue($inputFilter->has('isfinished'));
+      $this->assertFalse($inputFilter->has('currentprogress'));
+      $this->assertFalse($inputFilter->has('isfinished'));
       $this->assertTrue($inputFilter->has('user'));
-      $this->assertTrue($inputFilter->has('id'));
+      $this->assertFalse($inputFilter->has('id'));
 
     }
 

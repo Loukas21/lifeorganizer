@@ -281,7 +281,7 @@ class NavManager
                 $experienceDropdownItems[] = [
                             'id' => 'authorities',
                             'label' => 'Autorytety',
-                            'link' => $url('about')
+                            'link' => $url('authorities')
                         ];
             }
 

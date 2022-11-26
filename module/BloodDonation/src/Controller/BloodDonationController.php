@@ -110,11 +110,15 @@ class BloodDonationController extends AbstractActionController
 
     array_multisort($date, SORT_DESC, $amount, SORT_ASC, $successfulBloodDonations);
 
-    $bloodDonationStats['firstBloodDonationDate'] = end($successfulBloodDonations)['date'];
-
-    $bloodDonationStats['lastBloodDonationDate'] = $successfulBloodDonations[0]['date'];
-
-    $bloodDonationStats['lastSixBloodDonations'] = array_slice($successfulBloodDonations,0,6);
+    if (count($successfulBloodDonations) >= 1){
+        $bloodDonationStats['firstBloodDonationDate'] = end($successfulBloodDonations)['date'];
+        $bloodDonationStats['lastBloodDonationDate'] = $successfulBloodDonations[0]['date'];
+        $bloodDonationStats['lastSixBloodDonations'] = array_slice($successfulBloodDonations,0,6);
+    }
+    else {
+      $bloodDonationStats['firstBloodDonationDate'] = '';
+      $bloodDonationStats['lastBloodDonationDate'] = '';
+    }
 
     $bloodDonationStats['lastSixBloodDonationsDates']  = array_column($bloodDonationStats['lastSixBloodDonations'], 'date');
     $bloodDonationStats['lastSixBloodDonationsAmounts'] = array_column($bloodDonationStats['lastSixBloodDonations'], 'amount');
@@ -134,10 +138,10 @@ class BloodDonationController extends AbstractActionController
         $bloodDonationStats['eightWeeksConditionDate'] = date('Y-m-d');
     }
     else {
-    $bloodDonationStats['eightWeeksConditionDate'] = date('Y-m-d', strtotime($bloodDonationStats['lastBloodDonationDate'] . ' + 56 days'));
+    $bloodDonationStats['eightWeeksConditionDate'] = date('Y-m-d', strtotime($bloodDonationStats['lastBloodDonationDate'] . ' + 57 days'));
     }
     //calculate date of six donations per year condition
-    if ($bloodDonationStats['lastSixBloodDonationsDates'][5] == '') {
+    if (count($bloodDonationStats['lastSixBloodDonationsDates']) < 6 || $bloodDonationStats['lastSixBloodDonationsDates'][5] == '') {
           $bloodDonationStats['sixDonationsPerYearConditionDate'] = date('Y-m-d');
     }
     else {

@@ -35,5 +35,6 @@ return [
     'Quote',
     'Publication',
     'Language',
-    'BloodDonation'
+    'BloodDonation',
+    'Authority'
 ];

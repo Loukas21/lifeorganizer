@@ -45,6 +45,7 @@
     "autoload": {
         "psr-4": {
             "Application\\": "module/Application/src/",
+            "Authority\\": "module/Authority/src/",
             "User\\": "module/User/src/",
             "Quote\\": "module/Quote/src/",
             "Publication\\": "module/Publication/src/",

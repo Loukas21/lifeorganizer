@@ -1,0 +1,69 @@
+<?php
+$this->headTitle('Zarządzanie autorytetami');
+
+$this->mainMenu()->setActiveItemId('authorities');
+
+$this->pageBreadcrumbs()->setItems([
+            'Strona główna'=>$this->url('home'),
+            'Autorytety'=>$this->url('authorities'),
+            ]);
+?>
+
+<h3 class="app-content-title">Autorytety</h3>
+
+<?= $this->flashMessenger()->render('error', ['alert', 'alert-warning']); ?>
+<?= $this->flashMessenger()->render('success', ['alert', 'alert-success']); ?>
+<?= $this->flashMessenger()->render('info', ['alert', 'alert-info']); ?>
+<div id="authority-list">
+<h6 class="app-content-subtitle">Lista autorytetów</h6>
+<p>
+<a class="btn btn-secondary btn-sm" href="
+    <?= $this->url('authorities', ['action'=>'add']); ?>">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Dodaj autorytet
+</a>
+</p>
+
+<table class="table table-striped small table-responsive authorities-table">
+
+   <thead>
+        <!--<th>ID</th>-->
+        <th>Autorytet</th>
+        <th>Kolejność</th>
+        <th>Dziedzina</th>
+        <th>Opis</th>
+        <th class='nosort noorder'>Akcje</th>
+    </thead>
+    <tbody>
+    <?php foreach ($authorities as $authority): ?>
+
+    <tr>
+        <td>
+          <?= $this->escapeHtml($authority->getName()); ?>
+        </td>
+        <td>
+          <?= $this->escapeHtml($authority->getPosition()); ?>
+        </td>
+        <td>
+          <?= $this->escapeHtml($authority->getDomain()); ?>
+        </td>
+        <td>
+          <?= $this->escapeHtml($authority->getExplanation()); ?>
+        </td>
+        <td>
+            <nobr>
+            <a class="btn btn-secondary btn-sm" href="<?= $this->url('authorities',
+                    ['action'=>'edit', 'id'=>$authority->getId()]); ?>">
+                <span class="glyphicon glyphicon-pencil" ></span> Edytuj
+            </a>
+            <a class="btn btn-secondary btn-sm" href="<?= $this->url('authorities',
+                    ['action'=>'delete', 'id'=>$authority->getId()]); ?>" onclick="return confirm ('Czy na pewno chcesz usunąć ten rekord?')">
+                <span class="glyphicon glyphicon-remove"></span> Usuń
+            </a>
+          </nobr>
+        </td>
+    </tr>
+
+    <?php endforeach; ?>
+</tbody>
+</table>
+</div>

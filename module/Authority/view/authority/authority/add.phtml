@@ -1,0 +1,81 @@
+<?php
+$this->headTitle('Dodawanie autorytetu');
+
+$this->mainMenu()->setActiveItemId('authorities');
+
+$this->pageBreadcrumbs()->setItems([
+            'Strona główna'=>$this->url('home'),
+            'Autorytety'=>$this->url('authorities'),
+            'Dodawanie'=>$this->url('authorities', ['action'=>'add'])
+            ]);
+
+$form->get('name')->setAttributes([
+    'class'=>'form-control',
+    ]);
+
+$form->get('domain')->setAttributes([
+    'class'=>'form-control',
+    ]);
+
+$form->get('explanation')->setAttributes([
+    'class'=>'form-control',
+    'placeholder'=>'opisz autorytet',
+    'id' => 'certificatedescriptionarea'
+    ]);
+
+$form->get('submit')->setAttributes(['class'=>'btn btn-primary btn-sm']);
+
+$form->prepare();
+?>
+
+<h3 class="app-content-title">Autorytety</h3>
+<h6 class="app-content-subtitle">Dodawanie autorytetu</h6>
+<div class="row">
+    <div class="col-md-6">
+        <?= $this->form()->openTag($form); ?>
+
+        <div class="form-group">
+            <?= $this->formElement($form->get('user')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('name')); ?>
+            <?= $this->formElement($form->get('name')); ?>
+            <?= $this->formElementErrors($form->get('name')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('domain')); ?>
+            <?= $this->formElement($form->get('domain')); ?>
+            <?= $this->formElementErrors($form->get('domain')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('explanation')); ?>
+            <?= $this->formElement($form->get('explanation')); ?>
+            <?= $this->formElementErrors($form->get('explanation')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('ishiddeninvcv')); ?>
+            <?= $this->formElement($form->get('ishiddeninvcv')); ?>
+            <?= $this->formElementErrors($form->get('ishiddeninvcv')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('position')); ?>
+            <?= $this->formElement($form->get('position')); ?>
+            <?= $this->formElementErrors($form->get('position')); ?>
+        </div>
+
+        <?= $this->formElement($form->get('csrf')); ?>
+        <?= $this->formElementErrors($form->get('csrf')); ?>
+        <?= $this->formElement($form->get('submit')); ?>
+
+        <?= $this->form()->closeTag(); ?>
+    </div>
+</div>
+
+<?= $this->inlineScript()
+      ->prependFile($this->basePath('js/authorities.js'))
+?>

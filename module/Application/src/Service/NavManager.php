@@ -285,11 +285,11 @@ class NavManager
                         ];
             }
 
-            if ($this->rbacManager->isGranted(null, 'interests.manage')) {
+            if ($this->rbacManager->isGranted(null, 'hobbies.manage')) {
                 $experienceDropdownItems[] = [
-                            'id' => 'interests',
+                            'id' => 'hobbies',
                             'label' => 'Zainteresowania',
-                            'link' => $url('about')
+                            'link' => $url('hobbies')
                         ];
             }
 

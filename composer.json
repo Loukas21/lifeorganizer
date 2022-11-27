@@ -46,6 +46,7 @@
         "psr-4": {
             "Application\\": "module/Application/src/",
             "Authority\\": "module/Authority/src/",
+            "Hobby\\": "module/Hobby/src/",
             "User\\": "module/User/src/",
             "Quote\\": "module/Quote/src/",
             "Publication\\": "module/Publication/src/",
@@ -60,7 +61,8 @@
             "QuoteTest\\": "module/Quote/test/",
             "PublicationTest\\": "module/Publication/test/",
             "LanguageTest\\": "module/Language/test/",
-            "BloodDonationTest\\": "module/BloodDonation/test/"
+            "BloodDonationTest\\": "module/BloodDonation/test/",
+            "HobbyTest\\": "module/Hobby/test/"
         }
     },
     "extra": [],

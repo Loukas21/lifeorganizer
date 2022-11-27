@@ -1,0 +1,61 @@
+<?php
+$this->headTitle('Zarządzanie zainteresowaniami');
+
+$this->mainMenu()->setActiveItemId('hobbies');
+
+$this->pageBreadcrumbs()->setItems([
+            'Strona główna'=>$this->url('home'),
+            'Autorytety'=>$this->url('hobbies'),
+            ]);
+?>
+
+<h3 class="app-content-title">Zainteresowania</h3>
+
+<?= $this->flashMessenger()->render('error', ['alert', 'alert-warning']); ?>
+<?= $this->flashMessenger()->render('success', ['alert', 'alert-success']); ?>
+<?= $this->flashMessenger()->render('info', ['alert', 'alert-info']); ?>
+<div id="hobby-list">
+<h6 class="app-content-subtitle">Lista zainteresowań</h6>
+<p>
+<a class="btn btn-secondary btn-sm" href="
+    <?= $this->url('hobbies', ['action'=>'add']); ?>">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Dodaj zainteresowanie
+</a>
+</p>
+
+<table class="table table-striped small table-responsive hobbies-table">
+
+   <thead>
+        <!--<th>ID</th>-->
+        <th>Zainteresowanie</th>
+        <th>Kolejność</th>
+        <th class='nosort noorder'>Akcje</th>
+    </thead>
+    <tbody>
+    <?php foreach ($hobbies as $hobby): ?>
+
+    <tr>
+        <td>
+          <?= $this->escapeHtml($hobby->getName()); ?>
+        </td>
+        <td>
+          <?= $this->escapeHtml($hobby->getPosition()); ?>
+        </td>
+        <td>
+            <nobr>
+            <a class="btn btn-secondary btn-sm" href="<?= $this->url('hobbies',
+                    ['action'=>'edit', 'id'=>$hobby->getId()]); ?>">
+                <span class="glyphicon glyphicon-pencil" ></span> Edytuj
+            </a>
+            <a class="btn btn-secondary btn-sm" href="<?= $this->url('hobbies',
+                    ['action'=>'delete', 'id'=>$hobby->getId()]); ?>" onclick="return confirm ('Czy na pewno chcesz usunąć ten rekord?')">
+                <span class="glyphicon glyphicon-remove"></span> Usuń
+            </a>
+          </nobr>
+        </td>
+    </tr>
+
+    <?php endforeach; ?>
+</tbody>
+</table>
+</div>

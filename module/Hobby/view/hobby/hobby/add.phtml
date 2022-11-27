@@ -1,0 +1,59 @@
+<?php
+$this->headTitle('Dodawanie zainteresowania');
+
+$this->mainMenu()->setActiveItemId('hobbies');
+
+$this->pageBreadcrumbs()->setItems([
+            'Strona główna'=>$this->url('home'),
+            'Zainteresowania'=>$this->url('hobbies'),
+            'Dodawanie'=>$this->url('hobbies', ['action'=>'add'])
+            ]);
+
+$form->get('name')->setAttributes([
+    'class'=>'form-control',
+    ]);
+
+$form->get('submit')->setAttributes(['class'=>'btn btn-primary btn-sm']);
+
+$form->prepare();
+?>
+
+<h3 class="app-content-title">Zainteresowania</h3>
+<h6 class="app-content-subtitle">Dodawanie zainteresowania</h6>
+<div class="row">
+    <div class="col-md-6">
+        <?= $this->form()->openTag($form); ?>
+
+        <div class="form-group">
+            <?= $this->formElement($form->get('user')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('name')); ?>
+            <?= $this->formElement($form->get('name')); ?>
+            <?= $this->formElementErrors($form->get('name')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('ishiddeninvcv')); ?>
+            <?= $this->formElement($form->get('ishiddeninvcv')); ?>
+            <?= $this->formElementErrors($form->get('ishiddeninvcv')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('position')); ?>
+            <?= $this->formElement($form->get('position')); ?>
+            <?= $this->formElementErrors($form->get('position')); ?>
+        </div>
+
+        <?= $this->formElement($form->get('csrf')); ?>
+        <?= $this->formElementErrors($form->get('csrf')); ?>
+        <?= $this->formElement($form->get('submit')); ?>
+
+        <?= $this->form()->closeTag(); ?>
+    </div>
+</div>
+
+<?= $this->inlineScript()
+      ->prependFile($this->basePath('js/hobbies.js'))
+?>

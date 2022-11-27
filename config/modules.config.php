@@ -36,5 +36,6 @@ return [
     'Publication',
     'Language',
     'BloodDonation',
-    'Authority'
+    'Authority',
+    'Hobby',
 ];

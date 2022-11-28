@@ -90,5 +90,45 @@ $(document).ready(function() {
     }
   });
 
+  $('.authorities-table').DataTable({
+    columnDefs: [
+      { orderable: false, targets: 'nosort' },
+      { searchable: false, targets: 'noorder' },
+    ],
+    order: [1, "asc"],
+    "language": {
+      "paginate": {
+        "previous": "Poprzednia",
+        "next": "Następna"
+      },
+      "search": "Wyszukaj:",
+      "lengthMenu": "Pokaż _MENU_ rekordów",
+      "info": "Wyświetlane rekordy _START_-_END_ / _TOTAL_",
+      "infoEmpty": "Wyświetlane rekordy 0-0 / 0",
+      "infoFiltered": "(wyfiltrowane z _MAX_)",
+      "zeroRecords": "Nie znaleziono rekordów"
+    }
+  });
+
+  $('.hobbies-table').DataTable({
+    columnDefs: [
+      { orderable: false, targets: 'nosort' },
+      { searchable: false, targets: 'noorder' },
+    ],
+    order: [1, "asc"],
+    "language": {
+      "paginate": {
+        "previous": "Poprzednia",
+        "next": "Następna"
+      },
+      "search": "Wyszukaj:",
+      "lengthMenu": "Pokaż _MENU_ rekordów",
+      "info": "Wyświetlane rekordy _START_-_END_ / _TOTAL_",
+      "infoEmpty": "Wyświetlane rekordy 0-0 / 0",
+      "infoFiltered": "(wyfiltrowane z _MAX_)",
+      "zeroRecords": "Nie znaleziono rekordów"
+    }
+  });
+
 
 } );
